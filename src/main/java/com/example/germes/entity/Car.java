@@ -24,7 +24,7 @@ public class Car {
 
     private String carType;
 
-    private Double pricePerHour;
+    private Double pricePerKm;
 
     @OneToOne(mappedBy = "car")
     @JoinColumn(name = "driver_id", referencedColumnName = "id")
@@ -32,6 +32,6 @@ public class Car {
 
     public String toStringInConsole() {
         boolean isDriverSet = driver != null;
-        return id + "; " + brand + "; " + carNumber + "; " + carType + "; " + pricePerHour + "; driver: " + isDriverSet;
+        return id + "; " + brand + "; " + carNumber + "; " + carType + "; " + pricePerKm + "; driver: " + isDriverSet;
     }
 }
