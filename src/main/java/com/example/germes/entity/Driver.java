@@ -27,4 +27,8 @@ public class Driver {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;
+
+    public String toStringInConsole() {
+        return id + "; " + name + "; " + surname + "; " + isBusy + "; " + car.toStringInConsole();
+    }
 }

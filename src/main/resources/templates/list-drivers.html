@@ -30,6 +30,7 @@
             <th>Фамилия</th>
             <th>Выполняет заказ</th>
             <th>id машины</th>
+            <th>Действия</th>
         </tr>
         </thead>
         <tbody>
@@ -42,13 +43,52 @@
                 <span th:unless="${driver.isBusy}">Нет</span>
             </td>
             <td th:text="${driver.car.id}" />
+            <td>
+                <a th:href="@{/showUpdateForm(driverId=${driver.id})}" class="btn btn-info">Редактировать</a>
 
+                <a th:href="@{/deleteDriver(driverId=${driver.id})}" class="btn btn-danger ml-2">Удалить</a>
+            </td>
         </tr>
         </tbody>
 
     </table>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#driversTable").DataTable({
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': [-1] /* 1st one, start by the right */
+            }],
+            'language': {
+                "decimal":        "",
+                "emptyTable":     "Таблица пуста",
+                "info":           "Показ водителей от _START_ до _END_ (Всего: _TOTAL_)",
+                "infoEmpty":      "Показ от 0 до 0 из 0 водителей",
+                "infoFiltered":   "(Результаты поиска из _MAX_ водителей)",
+                "infoPostFix":    "",
+                "thousands":      ",",
+                "lengthMenu":     "Отображение _MENU_ водителей",
+                "loadingRecords": "Загрузка...",
+                "processing":     "Выполняется...",
+                "search":         "Поиск:",
+                "zeroRecords":    "Нет результатов",
+                "paginate": {
+                    "first":      "Первый",
+                    "last":       "Последний",
+                    "next":       "Следующий",
+                    "previous":   "Предыдущий"
+                },
+                "aria": {
+                    "sortAscending":  ": отсортировать по возрастанию",
+                    "sortDescending": ": отсортировать по убыванию"
+                }
+            }
+        });
+    })
+</script>
 </body>
 
 </html>

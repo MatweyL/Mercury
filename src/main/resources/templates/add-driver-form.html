@@ -14,7 +14,6 @@
         <h2>Добавить водителя</h2>
         <hr/>
         <form th:action="@{/saveDriver}" th:object="${driver}" method="POST">
-
             <input type="text" th:field="*{name}" placeholder="Введите имя" class="form-control col-4 mb-4">
             <input type="text" th:field="*{surname}" placeholder="Введите фамилию" class="form-control col-4 mb-4">
             <input type="text" th:field="*{car.brand}" placeholder="Введите марку автомобиля" class="form-control col-4 mb-4">
@@ -23,6 +22,8 @@
             <input type="text" th:field="*{car.pricePerHour}" placeholder="Выберете стоимость в час" class="form-control col-4 mb-4">
             <button class="btn btn-primary" type="submit">Сохранить</button>
         </form>
+        <hr/>
+        <a th:href="@{/list}">К списку водителей</a>
 
     </div>
 </body>

@@ -30,4 +30,8 @@ public class Car {
     @JoinColumn(name = "driver_id", referencedColumnName = "id")
     private Driver driver;
 
+    public String toStringInConsole() {
+        boolean isDriverSet = driver != null;
+        return id + "; " + brand + "; " + carNumber + "; " + carType + "; " + pricePerHour + "; driver: " + isDriverSet;
+    }
 }
