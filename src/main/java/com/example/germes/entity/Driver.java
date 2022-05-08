@@ -30,7 +30,7 @@ public class Driver {
     private Car car;
 
 
-    @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL)
     private List<DriverOrder> driverOrders;
 
     public String toStringInConsole() {

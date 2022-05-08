@@ -30,7 +30,7 @@ public class Cargo {
     private Double width;
 
     @OneToOne(mappedBy = "cargo")
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
-    private UserOrder order;
+    @JoinColumn(name = "user_order_id", referencedColumnName = "id")
+    private UserOrder userOrder;
 
 }

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base :: common_header(~{::title})">
+    <title>Фирма грузоперевозок "Гермес"</title>
+</head>
+<body>
+<div class="container">
+    <h1>Главная страница фирмы грузоперевозок "Гермес"</h1>
+    <a th:href="@{/driver/}">Водители фирмы</a>
+    <a th:href="@{/user_order/}">Список открытых заказов пользователей</a>
+
+</div>
+</body>
+</html>

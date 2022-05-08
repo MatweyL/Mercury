@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="base :: common_header(~{::title})">
     <title>Добавить водителя</title>
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-          crossorigin="anonymous" />
 </head>
 <body>
     <div class="container">
 
         <h2>Добавить водителя</h2>
         <hr/>
-        <form th:action="@{/saveDriver}" th:object="${driver}" method="POST">
-            <input type="text" th:field="*{name}" placeholder="Введите имя" class="form-control col-4 mb-4">
-            <input type="text" th:field="*{surname}" placeholder="Введите фамилию" class="form-control col-4 mb-4">
-            <input type="text" th:field="*{car.brand}" placeholder="Введите марку автомобиля" class="form-control col-4 mb-4">
-            <input type="text" th:field="*{car.carNumber}" placeholder="Введите номер автомобиля" class="form-control col-4 mb-4">
-            <input type="text" th:field="*{car.carType}" placeholder="Выберете тип автомобиля" class="form-control col-4 mb-4">
-            <input type="text" th:field="*{car.pricePerKm}" placeholder="Введите стоимость за км" class="form-control col-4 mb-4">
+        <form th:action="@{/driver/saveDriver}" th:object="${driver}" method="POST">
+            <input type="text" th:field="*{name}" placeholder="Введите имя" class="form-control col-4 mb-4" required>
+            <input type="text" th:field="*{surname}" placeholder="Введите фамилию" class="form-control col-4 mb-4" required>
+            <input type="text" th:field="*{car.brand}" placeholder="Введите марку автомобиля" class="form-control col-4 mb-4" required>
+            <input type="text" th:field="*{car.carNumber}" placeholder="Введите номер автомобиля" class="form-control col-4 mb-4" required>
+            <select th:field="*{car.carType}" class="form-control col-4 mb-4" required>
+                <option th:each="carTypeEnum : ${T(com.example.germes.entity.CarType).values()}"
+                        th:value="${carTypeEnum}" th:text="${carTypeEnum.displayValue}"></option>
+            </select>
+            <input type="text" th:field="*{car.pricePerKm}" placeholder="Введите стоимость за км" class="form-control col-4 mb-4" required>
             <button class="btn btn-primary" type="submit">Сохранить</button>
         </form>
         <hr/>
-        <a th:href="@{/list}">К списку водителей</a>
+        <a th:href="@{/driver/list}">К списку водителей</a>
 
     </div>
 </body>

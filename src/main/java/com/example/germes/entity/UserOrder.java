@@ -47,4 +47,20 @@ public class UserOrder {
     @JoinColumn(name = "driver_order_id", referencedColumnName = "id")
     private DriverOrder driverOrder;
 
+    public String toStringInConsole() {
+        return "UserOrder{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", carType='" + carType + '\'' +
+                ", cargo:" + (cargo != null) +
+                ", startAddress='" + startAddress + '\'' +
+                ", endAddress='" + endAddress + '\'' +
+                ", dateOfDispatch=" + dateOfDispatch +
+                ", distance=" + distance +
+                ", duration=" + duration +
+                ", deliveryCost=" + deliveryCost +
+                ", isClosed=" + isClosed +
+                ", driverOrder=" + (driverOrder != null) +
+                '}';
+    }
 }

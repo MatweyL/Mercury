@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Common styles and scripts -->
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous" />
+
+    <title>Оформить заказ</title>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=887b4001-d929-45aa-80c2-d6a6a57cd32b&lang=ru_RU" type="text/javascript">
+    </script>
+
+    <script type="text/javascript">
+        ymaps.ready(init);
+        var duration;
+        var distance;
+        function updateStartAddress(newStartAddress) {
+            console.log(newStartAddress);
+            let startAddressElem = document.getElementById('start-address');
+            console.log(startAddressElem);
+            startAddressElem.textContent = newStartAddress;
+        }
+
+        function updateEndAddress(newEndAddress) {
+            let endAddressElem = document.getElementById('end-address');
+            endAddressElem.textContent = newEndAddress;
+        }
+
+        function updateDeliveryCost(newCost) {
+            let deliveryCostElem = document.getElementById('delivery-cost');
+            deliveryCostElem.textContent = newCost;
+        }
+
+        function updateDrivingDuration(newDuration) {
+            let durationElem = document.getElementById('duration');
+            durationElem.value = newDuration;
+            duration = newDuration;
+        }
+
+        function updateDistance(newDistance) {
+            let distanceElem = document.getElementById('distance');
+            distanceElem.value = newDistance;
+            distance = newDistance;
+        }
+
+        function init() {
+            // Стоимость за километр.
+            var DELIVERY_TARIFF = 20,
+                // Минимальная стоимость.
+                MINIMUM_COST = 500,
+                myMap = new ymaps.Map('map', {
+                    center: [55.76, 37.64],
+                    zoom: 9,
+                    controls: []
+                }),
+                // Создадим панель маршрутизации.
+                routePanelControl = new ymaps.control.RoutePanel({
+                    options: {
+                        // Добавим заголовок панели.
+                        showHeader: true,
+                        title: 'Маршрут доставки'
+                    }
+                }),
+                zoomControl = new ymaps.control.ZoomControl({
+                    options: {
+                        size: 'small',
+                        float: 'none',
+                        position: {
+                            bottom: 145,
+                            right: 10
+                        }
+                    }
+                });
+            // Пользователь сможет построить только автомобильный маршрут.
+            routePanelControl.routePanel.options.set({
+                types: {auto: true}
+            });
+
+            // Если вы хотите задать неизменяемую точку "откуда", раскомментируйте код ниже.
+            /*routePanelControl.routePanel.state.set({
+                fromEnabled: false,
+                from: 'Москва, Льва Толстого 16'
+             });*/
+
+            myMap.controls.add(routePanelControl).add(zoomControl);
+
+            // Получим ссылку на маршрут.
+            routePanelControl.routePanel.getRouteAsync().then(function (route) {
+
+                // Зададим максимально допустимое число маршрутов, возвращаемых мультимаршрутизатором.
+                route.model.setParams({results: 1}, true);
+
+                // Повесим обработчик на событие построения маршрута.
+                route.model.events.add('requestsuccess', function () {
+
+                    var activeRoute = route.getActiveRoute();
+                    if (activeRoute) {
+                        // Получим протяженность маршрута.
+                        console.log(route.getActiveRoute().properties);
+                        var startAdressCoords = route.getActiveRoute().properties.get("boundedBy")[0];
+                        var endAdressCoords = route.getActiveRoute().properties.get("boundedBy")[1];
+                        var duration = route.getActiveRoute().properties.get("duration");
+                        var length = route.getActiveRoute().properties.get("distance"),
+                            // Вычислим стоимость доставки.
+                            price = calculate(Math.round(length.value / 1000)),
+                            // Создадим макет содержимого балуна маршрута.
+                            balloonContentLayout = ymaps.templateLayoutFactory.createClass(
+                                '<span>Расстояние: ' + length.text + '.</span><br/>' +
+                                '<span style="font-weight: bold; font-style: italic">Время доставки: ' + duration.text + ' </span>');
+                        // Зададим этот макет для содержимого балуна.
+                        route.options.set('routeBalloonContentLayout', balloonContentLayout);
+                        // Откроем балун.
+                        activeRoute.balloon.open();
+                        updateDrivingDuration(Math.round(duration.value/60));//duration.value measured in seconds
+                        updateDistance(Math.round(length.value/1000));//length.value measured in meters
+                        updateDeliveryCost(price);
+                    }
+                });
+
+            });
+            // Функция, вычисляющая стоимость доставки.
+            function calculate(routeLength) {
+                return Math.max(routeLength * DELIVERY_TARIFF, MINIMUM_COST);
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Оформить заказ</h1>
+        <hr/>
+        <div id="map" class="" style="width: 100%; height: 500px"></div>
+        <form th:action="@{/user_order/saveUserOrder}" th:object="${userOrder}" method="POST">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-6">
+                    <h3>Информация о грузе</h3>
+                    <select th:field="*{cargo.cargoType}" class="form-control mb-4" required>
+                        <option th:each="cargoTypeEnum : ${T(com.example.germes.entity.CargoType).values()}"
+                                th:value="${cargoTypeEnum}" th:text="${cargoTypeEnum.displayValue}"></option>
+                    </select>
+                    <textarea th:field="*{description}" class="form-control mb-4" rows="3" placeholder="Введите краткое описание груза" required></textarea>
+                    <input type="number" min="0" step="1" th:field="*{cargo.weight}" placeholder="Введите вес груза" class="form-control mb-4" required>
+                    <input type="number" min="0" step="0.1" th:field="*{cargo.length}" placeholder="Введите длину груза" class="form-control mb-4" required>
+                    <input type="number" min="0" step="0.1" th:field="*{cargo.width}" placeholder="Введите ширину груза" class="form-control mb-4" required>
+                    <input type="number" min="0" step="0.1" th:field="*{cargo.height}" placeholder="Введите высоту груза" class="form-control mb-4" required>
+                    <input type="number" min="0" step="0.1" th:field="*{cargo.width}" placeholder="Введите ширину груза" class="form-control mb-4" required>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6">
+                    <h3>Параметры доставки</h3>
+                    <select th:field="*{carType}" class="form-control mb-4" required>
+                        <option th:each="carTypeEnum : ${T(com.example.germes.entity.CarType).values()}"
+                                th:value="${carTypeEnum}" th:text="${carTypeEnum.displayValue}"></option>
+                    </select>
+                    <input type="text" th:field="*{startAddress}" placeholder="Введите адрес отправки" class="form-control mb-4" required>
+                    <input type="text" th:field="*{endAddress}" placeholder="Введите адрес получения" class="form-control mb-4" required>
+                    <input type="date" th:field="*{dateOfDispatch}" placeholder="Выберете дату отправки" class="form-control mb-4" required>
+                    <input type="number" th:field="*{distance}" placeholder="Введите дистанцию" class="form-control mb-4" id="distance" readonly>
+                    <input type="number" th:field="*{duration}" placeholder="Введите длительность транспортировки" class="form-control mb-4" id="duration" readonly>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Сохранить</button>
+        </form>
+        <a th:href="@{/user_order/list}">К списку заказов</a>
+    </div>
+</body>
+</html>

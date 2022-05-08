@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping(value = "/driver")
 public class DriverController {
 
     @Autowired
@@ -38,7 +39,7 @@ public class DriverController {
         driver.setIsBusy(false);
         driver.getCar().setDriver(driver);
         driverRepository.save(driver);
-        return "redirect:/list";
+        return "redirect:list";
     }
 
     @GetMapping("/showUpdateForm")
@@ -56,13 +57,13 @@ public class DriverController {
         driver.getCar().setDriver(driver);
         System.out.println(driver.toStringInConsole());
         driverRepository.save(driver);
-        return "redirect:/list";
+        return "redirect:list";
     }
 
     @GetMapping("/deleteDriver")
     public String deleteDriver(@RequestParam Long driverId) {
         driverRepository.deleteById(driverId);
-        return "redirect:/list";
+        return "redirect:list";
     }
 
 }
