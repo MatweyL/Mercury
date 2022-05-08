@@ -39,6 +39,7 @@ public class UserOrderController {
     @PostMapping("/saveUserOrder")
     private String saveUserOrder(@ModelAttribute UserOrder userOrder) {
         System.out.println(userOrder.toStringInConsole());
+        userOrderRepository.save(userOrder);
         return "redirect:list";
     }
 

@@ -21,4 +21,5 @@ public enum CarType {
     public String getDisplayValue() {
         return displayValue;
     }
+
 }
