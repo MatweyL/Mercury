@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "cargo")
+@Table(name = "cargos")
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -21,8 +21,6 @@ public class Cargo {
 
     private String cargoType;
 
-    private String carType;
-
     private Double weight;
 
     private Double length;
@@ -30,5 +28,9 @@ public class Cargo {
     private Double height;
 
     private Double width;
+
+    @OneToOne(mappedBy = "cargo")
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private UserOrder order;
 
 }

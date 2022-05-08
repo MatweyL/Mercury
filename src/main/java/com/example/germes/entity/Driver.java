@@ -3,9 +3,10 @@ package com.example.germes.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "driver")
+@Table(name = "drivers")
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -28,7 +29,12 @@ public class Driver {
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;
 
+
+    @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DriverOrder> driverOrders;
+
     public String toStringInConsole() {
         return id + "; " + name + "; " + surname + "; " + isBusy + "; " + car.toStringInConsole();
     }
+
 }
