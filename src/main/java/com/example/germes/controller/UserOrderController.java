@@ -3,10 +3,13 @@ package com.example.germes.controller;
 import com.example.germes.entity.Driver;
 import com.example.germes.entity.UserOrder;
 import com.example.germes.repo.UserOrderRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.lang.reflect.MalformedParameterizedTypeException;
 
@@ -36,8 +39,22 @@ public class UserOrderController {
         return mav;
     }
 
+
+    //saveUserOrderRedirect
+    @RequestMapping(value = "/payUserOrder",method={ RequestMethod.GET, RequestMethod.POST })
+    public ModelAndView payUserOrder(@ModelAttribute UserOrder userOrder,
+                                       BindingResult binding, ModelAndView mav,
+                                       final RedirectAttributes redirectAttributes) {
+        int PAY_PER_KM = 20;
+        userOrder.setDeliveryCost(PAY_PER_KM * userOrder.getDistance());
+        redirectAttributes.addFlashAttribute("userOrder", userOrder);
+        mav.setViewName("user/user-order-payment");
+        return mav;
+    }
+
     @PostMapping("/saveUserOrder")
     private String saveUserOrder(@ModelAttribute UserOrder userOrder) {
+        userOrder.setIsClosed(false);
         System.out.println(userOrder.toStringInConsole());
         userOrderRepository.save(userOrder);
         return "redirect:list";

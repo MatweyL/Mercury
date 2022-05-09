@@ -39,14 +39,14 @@
 
         function updateDrivingDuration(newDuration) {
             let durationElem = document.getElementById('duration');
-            durationElem.value = newDuration;
             duration = newDuration;
+            durationElem.value = duration;
         }
 
         function updateDistance(newDistance) {
             let distanceElem = document.getElementById('distance');
-            distanceElem.value = newDistance;
             distance = newDistance;
+            distanceElem.value = distance;
         }
 
         function init() {
@@ -139,7 +139,7 @@
         <h1>Оформить заказ</h1>
         <hr/>
         <div id="map" class="" style="width: 100%; height: 500px"></div>
-        <form th:action="@{/user_order/saveUserOrder}" th:object="${userOrder}" method="POST" id="userOrderForm">
+        <form th:action="@{/user_order/payUserOrder}" th:object="${userOrder}" method="POST" id="userOrderForm">
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-6">
                     <h3>Информация о грузе</h3>
@@ -166,7 +166,7 @@
                     <input type="number" th:field="*{duration}" placeholder="Введите длительность транспортировки" class="form-control mb-4" id="duration" readonly>
                 </div>
             </div>
-            <button class="btn btn-primary" type="submit">Сохранить</button>
+            <button class="btn btn-primary" type="submit">Оформить</button>
         </form>
         <a th:href="@{/user_order/list}">К списку заказов</a>
         <script>
@@ -196,6 +196,8 @@
             }
 
             document.getElementById("userOrderForm").onsubmit = validateInputs;
+
+
         </script>
     </div>
 </body>
