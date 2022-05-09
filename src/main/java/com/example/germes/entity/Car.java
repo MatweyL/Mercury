@@ -31,7 +31,7 @@ public class Car {
 
     private String carType;
 
-    private Double pricePerKm;
+    private Double pricePerKm; //TODO: change to loadCapacity
 
     @OneToOne(mappedBy = "car")
     @JoinColumn(name = "driver_id", referencedColumnName = "id")

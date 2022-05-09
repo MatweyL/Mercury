@@ -19,6 +19,7 @@
         ymaps.ready(init);
         var duration;
         var distance;
+
         function updateStartAddress(newStartAddress) {
             console.log(newStartAddress);
             let startAddressElem = document.getElementById('start-address');
@@ -130,13 +131,15 @@
 
         }
     </script>
+
+
 </head>
 <body>
     <div class="container">
         <h1>Оформить заказ</h1>
         <hr/>
         <div id="map" class="" style="width: 100%; height: 500px"></div>
-        <form th:action="@{/user_order/saveUserOrder}" th:object="${userOrder}" method="POST">
+        <form th:action="@{/user_order/saveUserOrder}" th:object="${userOrder}" method="POST" id="userOrderForm">
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-6">
                     <h3>Информация о грузе</h3>
@@ -158,7 +161,7 @@
                     </select>
                     <input type="text" th:field="*{startAddress}" placeholder="Введите адрес отправки" class="form-control mb-4" required>
                     <input type="text" th:field="*{endAddress}" placeholder="Введите адрес получения" class="form-control mb-4" required>
-                    <input type="date" th:field="*{dateOfDispatch}" placeholder="Выберете дату отправки" class="form-control mb-4" required>
+                    <input type="date" th:field="*{dateOfDispatch}" placeholder="Выберете дату отправки" class="form-control mb-4" id="datepicker" required>
                     <input type="number" th:field="*{distance}" placeholder="Введите дистанцию" class="form-control mb-4" id="distance" readonly>
                     <input type="number" th:field="*{duration}" placeholder="Введите длительность транспортировки" class="form-control mb-4" id="duration" readonly>
                 </div>
@@ -166,6 +169,34 @@
             <button class="btn btn-primary" type="submit">Сохранить</button>
         </form>
         <a th:href="@{/user_order/list}">К списку заказов</a>
+        <script>
+            function getTwoPlaceNumber(number) {
+                if (number < 10) {
+                    return "0" + number;
+                } else {
+                    return "" + number;
+                }
+            }
+            function getRequiredDateFormat(year, month, day) {
+                return year + "-" + getTwoPlaceNumber(month) + "-" + getTwoPlaceNumber(day);
+            }
+            let now = new Date();
+            let minDate = getRequiredDateFormat(now.getFullYear(), (now.getMonth() + 1), now.getDate());
+            console.log(minDate);
+            document.getElementById('datepicker').setAttribute('min', minDate);
+
+            function validateInputs() {
+                let distanceValue =  document.getElementById("distance").value;
+                let durationValue =  document.getElementById("duration").value;
+                if (distanceValue === "" || durationValue === "") {
+                    alert("Выберете точки отправления и прибытия груза.")
+                    return false;
+                }
+                return true;
+            }
+
+            document.getElementById("userOrderForm").onsubmit = validateInputs;
+        </script>
     </div>
 </body>
 </html>
