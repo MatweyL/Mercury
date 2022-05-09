@@ -43,4 +43,12 @@ public class UserOrderController {
         return "redirect:list";
     }
 
+    @GetMapping("/showUserOrderDetails")
+    private ModelAndView showUserOrderDetails(@RequestParam Long userOrderId) {
+        ModelAndView mav = new ModelAndView("user/user-order-details");
+        UserOrder userOrder = userOrderRepository.getById(userOrderId);
+        mav.addObject("userOrder", userOrder);
+        return mav;
+    }
+
 }

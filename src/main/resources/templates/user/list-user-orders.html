@@ -27,8 +27,8 @@
                 <td th:text="${userOrder.carType}" />
                 <td th:text="${userOrder.deliveryCost}" />
                 <td th:text="${userOrder.duration}" />
-                <td>Подробная информация
-<!--                    <a th:href="@{/user_order/showUserOrderDetails(userOrderId=${userOrder.id})}" class="btn btn-info">Подробная информация</a>-->
+                <td>
+                    <a th:href="@{/user_order/showUserOrderDetails(userOrderId=${userOrder.id})}" class="btn btn-info">Подробная информация</a>
                 </td>
             </tr>
             </tbody>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="base :: common_header(~{::title})">
+    <title>Подробная информация о заказе</title>
+</head>
+<body>
+<div class="container">
+    <h1>Подробная информация о заказе</h1>
+    <hr/>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-6">
+                <h3>Информация о грузе</h3>
+                <div>Подробное описание: </div>
+                <p th:text="*{userOrder.description}"></p>
+                <div th:object="${userOrder.cargo}">
+                    <p>Тип груза: <span th:text="*{cargoType}"></span></p>
+                    <p>Вес: <span th:text="*{weight}"></span> кг</p>
+                    <p>Длина: <span th:text="*{length}"></span> м</p>
+                    <p>Ширина: <span th:text="*{width}"></span> м</p>
+                    <p>Высота: <span th:text="*{height}"></span> м</p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6">
+                <h3>Параметры доставки</h3>
+                <div th:object="${userOrder}">
+                    <p>Тип автомобиля: <span th:text="*{carType}"></span></p>
+                    <p>Дата отправки: <span th:text="*{dateOfDispatch}"></span></p>
+                    <p>Адрес отправки: <span th:text="*{startAddress}"></span></p>
+                    <p>Адрес прибытия: <span th:text="*{endAddress}"></span></p>
+                    <p>Дистанция транспортировки: <span th:text="*{distance}"></span> км.</p>
+                    <p>Длительность транспортировки: <span th:text="*{duration}"></span> мин.</p>
+                    <p>Оплата транспортировки: <span th:text="*{deliveryCost}"></span> р.</p>
+                    <p>Заказ направлен водителю:
+                        <span th:if="${isClosed}">Да</span>
+                        <span th:unless="${isClosed}">Нет</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    <a th:href="@{/user_order/list}">К списку заказов</a>
+</div>
+</body>
+</html>
