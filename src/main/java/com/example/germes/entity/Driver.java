@@ -15,8 +15,15 @@ import java.util.List;
 public class Driver {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @SequenceGenerator(
+            name = "driver_sequence",
+            sequenceName = "driver_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "driver_sequence"
+    )
     private Long id;
 
     private String name;

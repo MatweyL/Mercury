@@ -15,8 +15,15 @@ import javax.persistence.*;
 public class Cargo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @SequenceGenerator(
+            name = "cargo_sequence",
+            sequenceName = "cargo_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "cargo_sequence"
+    )
     private Long id;
 
     private String cargoType;

@@ -16,8 +16,15 @@ import java.util.Date;
 public class UserOrder {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @SequenceGenerator(
+            name = "user_order_sequence",
+            sequenceName = "user_order_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_order_sequence"
+    )
     private Long id;
 
     private String description;

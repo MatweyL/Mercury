@@ -14,8 +14,15 @@ import javax.persistence.*;
 public class Car {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @SequenceGenerator(
+            name = "car_sequence",
+            sequenceName = "car_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "car_sequence"
+    )
     private Long id;
 
     private String brand;

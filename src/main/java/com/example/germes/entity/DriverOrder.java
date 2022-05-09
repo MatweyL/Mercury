@@ -14,8 +14,15 @@ import javax.persistence.*;
 public class DriverOrder {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @SequenceGenerator(
+            name = "driver_order_sequence",
+            sequenceName = "driver_order_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "driver_order_sequence"
+    )
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
