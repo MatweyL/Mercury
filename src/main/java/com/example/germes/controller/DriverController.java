@@ -1,7 +1,6 @@
 package com.example.germes.controller;
 
 import com.example.germes.entity.Driver;
-import com.example.germes.repo.CarRepository;
 import com.example.germes.repo.DriverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,14 +20,14 @@ public class DriverController {
 
     @GetMapping({"/list", "/"})
     public ModelAndView getAllDrivers() {
-        ModelAndView mav = new ModelAndView("list-drivers");
+        ModelAndView mav = new ModelAndView("admin/driver/driver_creation/list-drivers");
         mav.addObject("drivers", driverRepository.findAll());
         return mav;
     }
 
     @GetMapping("/addDriverForm")
     public ModelAndView addDriverForm() {
-        ModelAndView mav = new ModelAndView("add-driver-form");
+        ModelAndView mav = new ModelAndView("admin/driver/driver_creation/add-driver-form");
         Driver newDriver = new Driver();
         mav.addObject("driver", newDriver);
         return mav;
@@ -44,7 +43,7 @@ public class DriverController {
 
     @GetMapping("/showUpdateForm")
     public ModelAndView showUpdateForm(@RequestParam Long driverId) {
-        ModelAndView mav = new ModelAndView("update-driver-form");
+        ModelAndView mav = new ModelAndView("admin/driver/driver_creation/update-driver-form");
         Driver driver = driverRepository.findById(driverId).get();
         mav.addObject("driver", driver);
         System.out.println(driver.toStringInConsole());

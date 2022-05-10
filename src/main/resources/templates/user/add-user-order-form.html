@@ -161,7 +161,7 @@
                     </select>
                     <input type="text" th:field="*{startAddress}" placeholder="Введите адрес отправки" class="form-control mb-4" required>
                     <input type="text" th:field="*{endAddress}" placeholder="Введите адрес получения" class="form-control mb-4" required>
-                    <input type="date" th:field="*{dateOfDispatch}" placeholder="Выберете дату отправки" class="form-control mb-4" id="datepicker" required>
+                    <input type="datetime-local" th:value="${dateTimeString}" name="dateTimeString" placeholder="Выберете дату отправки" class="form-control mb-4" id="datepicker" required>
                     <input type="number" th:field="*{distance}" placeholder="Введите дистанцию" class="form-control mb-4" id="distance" readonly>
                     <input type="number" th:field="*{duration}" placeholder="Введите длительность транспортировки" class="form-control mb-4" id="duration" readonly>
                 </div>
@@ -178,7 +178,7 @@
                 }
             }
             function getRequiredDateFormat(year, month, day) {
-                return year + "-" + getTwoPlaceNumber(month) + "-" + getTwoPlaceNumber(day);
+                return year + "-" + getTwoPlaceNumber(month) + "-" + getTwoPlaceNumber(day) + "T00:00";
             }
             let now = new Date();
             let minDate = getRequiredDateFormat(now.getFullYear(), (now.getMonth() + 1), now.getDate());

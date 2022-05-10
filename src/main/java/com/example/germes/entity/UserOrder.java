@@ -39,7 +39,7 @@ public class UserOrder {
 
     private String endAddress;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date dateOfDispatch;
 
     private Double distance;

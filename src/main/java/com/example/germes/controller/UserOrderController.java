@@ -12,6 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.lang.reflect.MalformedParameterizedTypeException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 @Controller
 @RequestMapping(value = "/user_order")
@@ -42,10 +45,13 @@ public class UserOrderController {
 
     //saveUserOrderRedirect
     @RequestMapping(value = "/payUserOrder",method={ RequestMethod.GET, RequestMethod.POST })
-    public ModelAndView payUserOrder(@ModelAttribute UserOrder userOrder,
+    public ModelAndView payUserOrder(@ModelAttribute UserOrder userOrder, @RequestParam(name = "dateTimeString") String dateTimeString,
                                        BindingResult binding, ModelAndView mav,
                                        final RedirectAttributes redirectAttributes) {
         int PAY_PER_KM = 20;
+        LocalDateTime dateOfDispatchLDT = LocalDateTime.parse(dateTimeString);
+        Date dateOfDispatch = Date.from(dateOfDispatchLDT.atZone(ZoneId.systemDefault()).toInstant());
+        userOrder.setDateOfDispatch(dateOfDispatch);
         userOrder.setDeliveryCost(PAY_PER_KM * userOrder.getDistance());
         redirectAttributes.addFlashAttribute("userOrder", userOrder);
         mav.setViewName("user/user-order-payment");

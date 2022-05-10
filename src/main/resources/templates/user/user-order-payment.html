@@ -21,7 +21,7 @@
                     <input th:field="*{carType}" class="form-control mb-4" readonly>
                     <input type="text" th:field="*{startAddress}" placeholder="Введите адрес отправки" class="form-control mb-4" readonly>
                     <input type="text" th:field="*{endAddress}" placeholder="Введите адрес получения" class="form-control mb-4" readonly>
-                    <input type="date" th:field="*{dateOfDispatch}" placeholder="Выберете дату отправки" class="form-control mb-4" id="datepicker" readonly>
+                    <input type="text" th:field="*{dateOfDispatch}" name="dateTimeString" placeholder="Выберете дату отправки" class="form-control mb-4" id="datepicker2" readonly>
                     <input type="number" th:field="*{distance}" placeholder="Введите дистанцию" class="form-control mb-4" id="distance" readonly>
                     <input type="number" th:field="*{duration}" placeholder="Введите длительность транспортировки" class="form-control mb-4" id="duration" readonly>
 
