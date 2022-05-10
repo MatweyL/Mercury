@@ -31,8 +31,8 @@
                     <p>Длительность транспортировки: <span th:text="*{duration}"></span> мин.</p>
                     <p>Оплата транспортировки: <span th:text="*{deliveryCost}"></span> р.</p>
                     <p>Заказ направлен водителю:
-                        <span th:if="${isClosed}">Да</span>
-                        <span th:unless="${isClosed}">Нет</span>
+                        <span th:if="${userOrder.isClosed}">Да</span>
+                        <span th:unless="${userOrder.isClosed}">Нет</span>
                     </p>
                 </div>
             </div>

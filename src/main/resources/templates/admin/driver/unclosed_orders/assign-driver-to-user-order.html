@@ -34,6 +34,32 @@
         </div>
     </div>
     <div>Список свободных водителей с автомобилем типа <span th:text="${userOrder.carType}"></span> на дату <span th:text="${userOrder.dateOfDispatch}"></span></div>
+    <table class="table table-bordered table-striped" id="driversTable">
+
+        <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Марка машины</th>
+            <th>Номер машины</th>
+            <th>Тип машины</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="driver: ${freeDrivers}">
+            <td th:text="${driver.name}" />
+            <td th:text="${driver.surname}" />
+            <td th:text="${driver.car.brand}" />
+            <td th:text="${driver.car.carNumber}" />
+            <td th:text="${driver.car.carType}" />
+            <td>
+                <a th:href="@{/driver_order/assignDriver(userOrderId=${userOrder.id}, driverId=${driver.id})}" class="btn btn-info">Назначить</a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
     <a th:href="@{/driver_order/list}">К списку незакрытых заказов</a>
 </div>
 </body>

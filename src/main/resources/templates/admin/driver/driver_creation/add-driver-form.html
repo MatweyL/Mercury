@@ -15,7 +15,7 @@
             <input type="text" th:field="*{car.carNumber}" placeholder="Введите номер автомобиля" class="form-control col-4 mb-4" required>
             <select th:field="*{car.carType}" class="form-control col-4 mb-4" required>
                 <option th:each="carTypeEnum : ${T(com.example.germes.entity.CarType).values()}"
-                        th:value="${carTypeEnum}" th:text="${carTypeEnum.displayValue}"></option>
+                        th:value="${carTypeEnum.displayValue}" th:text="${carTypeEnum.displayValue}"></option>
             </select>
             <input type="text" th:field="*{car.pricePerKm}" placeholder="Введите стоимость за км" class="form-control col-4 mb-4" required>
             <button class="btn btn-primary" type="submit">Сохранить</button>

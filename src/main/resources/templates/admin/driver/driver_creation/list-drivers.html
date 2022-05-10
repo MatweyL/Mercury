@@ -14,24 +14,28 @@
 
         <thead>
         <tr>
-            <th>id</th>
             <th>Имя</th>
             <th>Фамилия</th>
+            <th>Марка машины</th>
+            <th>Номер машины</th>
+            <th>Тип машины</th>
+            <th>Стоимость в час</th>
             <th>Выполняет заказ</th>
-            <th>id машины</th>
             <th>Действия</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="driver: ${drivers}">
-            <td th:text="${driver.id}" />
             <td th:text="${driver.name}" />
             <td th:text="${driver.surname}" />
+            <td th:text="${driver.car.brand}" />
+            <td th:text="${driver.car.carNumber}" />
+            <td th:text="${driver.car.carType}" />
+            <td th:text="${driver.car.pricePerKm}" />
             <td>
                 <span th:if="${driver.isBusy}">Да</span>
                 <span th:unless="${driver.isBusy}">Нет</span>
             </td>
-            <td th:text="${driver.car.id}" />
             <td>
                 <a th:href="@{/driver/showUpdateForm(driverId=${driver.id})}" class="btn btn-info">Редактировать</a>
 
