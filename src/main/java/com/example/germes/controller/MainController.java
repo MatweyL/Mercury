@@ -9,7 +9,7 @@ public class MainController {
 
     @GetMapping
     public ModelAndView showMainPage() {
-        ModelAndView mav = new ModelAndView("index");
+        ModelAndView mav = new ModelAndView("я");
         return mav;
     }
 }
