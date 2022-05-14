@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="base :: common_header(~{::title})">
     <title>Фирма грузоперевозок "Гермес"</title>
 </head>
 <body>
-<div class="container">
-    <h1>Авторизация в фирме "Гермес"</h1>
-    <div><a th:href="@{/login}">Войти</a></div>
-    <div><a href="/logout">Выйти</a></div>
-    <div><a th:href="@{/registration}">Зарегистрироваться</a></div>
-
-</div>
+    <div th:insert="~{base :: site_navbar}"></div>
+    <div class="container">
+        <h1>Авторизация в фирме "Гермес"</h1>
+        <div><a th:href="@{/login}">Войти</a></div>
+        <div><a href="/logout">Выйти</a></div>
+        <div><a th:href="@{/registration}">Зарегистрироваться</a></div>
+    </div>
 </body>
 </html>
