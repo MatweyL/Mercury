@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="base :: common_header(~{::title})">
     <title>Редактировать информацию о водителе</title>
 </head>
@@ -8,7 +8,7 @@
 
     <h2>Редактировать информацию о водителе</h2>
     <hr/>
-    <form th:action="@{/driver/updateDriver}" th:object="${driver}" method="POST">
+    <form th:action="@{/admin/driver/updateDriver}" th:object="${driver}" method="POST">
         <input type="hidden" th:field="*{id}"/>
         <input type="hidden" th:field="*{isBusy}"/>
         <input type="hidden" th:field="*{car.id}"/>
@@ -24,7 +24,7 @@
         <button class="btn btn-primary" type="submit">Сохранить</button>
     </form>
     <hr/>
-    <a th:href="@{/driver/list}">К списку водителей</a>
+    <a th:href="@{/admin/driver/list}">К списку водителей</a>
 
 </div>
 </body>

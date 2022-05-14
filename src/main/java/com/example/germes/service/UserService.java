@@ -24,6 +24,7 @@ public class UserService implements UserDetailsService {
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        createAdmin();
     }
 
     @Override
@@ -54,7 +55,7 @@ public class UserService implements UserDetailsService {
             User user = new User();
             user.setUsername("admin");
             user.setEmail("germes-admin@germes.com");
-            user.setUsername(passwordEncoder.encode("admin"));
+            user.setPassword(passwordEncoder.encode("admin"));
             user.setRole(Role.ADMIN);
             userRepository.save(user);
         }

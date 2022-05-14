@@ -28,40 +28,41 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active" sec:authorize="hasRole('USER')">
-                <a class="nav-link" href="#">Создать заказ</a>
+                <a class="nav-link" th:href="@{/user_order/addUserOrderForm}">Создать заказ</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Список заказов</a>
+            <li class="nav-item" sec:authorize="hasRole('USER')">
+                <a class="nav-link active" th:href="@{/user_order/}">Список заказов</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+
+            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                <a class="nav-link active" th:href="@{/admin/driver/}">Список водителей</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
+            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                <a class="nav-link active" href="#">Список всех заказов</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                <a class="nav-link active" th:href="@{/admin/driver_order/}">Список открытых заказов</a>
             </li>
         </ul>
         <div class="form-inline my-2 my-lg-0">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto"  sec:authorize="!isAuthenticated()">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Войти</a>
+                    <a class="nav-link" th:href="@{/login}">Войти</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Зарегистрироваться</a>
+                    <a class="nav-link" th:href="@{/registration}">Зарегистрироваться</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto"  sec:authorize="isAuthenticated()">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/logout">Выйти</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
     <div th:fragment="to_main_page">
-        <a th:href="@{/}">На главную</a>
+        <a th:href="@{/main}">На главную</a>
     </div>
 </body>
 </html>

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "/driver_order")
+@RequestMapping(value = "/admin/driver_order")
 public class DriverOrderController {
 
     @Autowired

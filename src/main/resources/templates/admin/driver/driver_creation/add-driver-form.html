@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="base :: common_header(~{::title})">
     <title>Добавить водителя</title>
 </head>
@@ -8,7 +8,7 @@
 
         <h2>Добавить водителя</h2>
         <hr/>
-        <form th:action="@{/driver/saveDriver}" th:object="${driver}" method="POST">
+        <form th:action="@{/admin/driver/saveDriver}" th:object="${driver}" method="POST">
             <input type="text" th:field="*{name}" placeholder="Введите имя" class="form-control col-4 mb-4" required>
             <input type="text" th:field="*{surname}" placeholder="Введите фамилию" class="form-control col-4 mb-4" required>
             <input type="text" th:field="*{car.brand}" placeholder="Введите марку автомобиля" class="form-control col-4 mb-4" required>
@@ -21,7 +21,7 @@
             <button class="btn btn-primary" type="submit">Сохранить</button>
         </form>
         <hr/>
-        <a th:href="@{/driver/list}">К списку водителей</a>
+        <a th:href="@{/admin/driver/list}">К списку водителей</a>
 
     </div>
 </body>

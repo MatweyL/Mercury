@@ -9,7 +9,7 @@
 
     <h3>Список водителей</h3>
     <hr/>
-    <a th:href="@{/driver/addDriverForm}" class="btn btn-primary">Добавить водителя</a>
+    <a th:href="@{/admin/driver/addDriverForm}" class="btn btn-primary">Добавить водителя</a>
     <table class="table table-bordered table-striped" id="driversTable">
 
         <thead>
@@ -37,9 +37,9 @@
                 <span th:unless="${driver.isBusy}">Нет</span>
             </td>
             <td>
-                <a th:href="@{/driver/showUpdateForm(driverId=${driver.id})}" class="btn btn-info">Редактировать</a>
+                <a th:href="@{/admin/driver/showUpdateForm(driverId=${driver.id})}" class="btn btn-info">Редактировать</a>
 
-                <a th:href="@{/driver/deleteDriver(driverId=${driver.id})}" class="btn btn-danger ml-2">Удалить</a>
+                <a th:href="@{/admin/driver/deleteDriver(driverId=${driver.id})}" class="btn btn-danger ml-2">Удалить</a>
             </td>
         </tr>
         </tbody>

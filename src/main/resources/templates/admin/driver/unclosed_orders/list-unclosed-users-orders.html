@@ -29,7 +29,7 @@
             <td th:text="${userOrder.duration}" />
             <td th:text="${userOrder.dateOfDispatch}" />
             <td>
-                <a th:href="@{/driver_order/showDriverOrderAssignForm(userOrderId=${userOrder.id})}" class="btn btn-info">Назначить водителя</a>
+                <a th:href="@{/admin/driver_order/showDriverOrderAssignForm(userOrderId=${userOrder.id})}" class="btn btn-info">Назначить водителя</a>
             </td>
         </tr>
         </tbody>

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "/driver")
+@RequestMapping(value = "/admin/driver")
 public class DriverController {
 
     @Autowired

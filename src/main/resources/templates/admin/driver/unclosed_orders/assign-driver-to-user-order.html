@@ -54,13 +54,13 @@
             <td th:text="${driver.car.carNumber}" />
             <td th:text="${driver.car.carType}" />
             <td>
-                <a th:href="@{/driver_order/assignDriver(userOrderId=${userOrder.id}, driverId=${driver.id})}" class="btn btn-info">Назначить</a>
+                <a th:href="@{/admin/driver_order/assignDriver(userOrderId=${userOrder.id}, driverId=${driver.id})}" class="btn btn-info">Назначить</a>
             </td>
         </tr>
         </tbody>
 
     </table>
-    <a th:href="@{/driver_order/list}">К списку незакрытых заказов</a>
+    <a th:href="@{/admin/driver_order/list}">К списку незакрытых заказов</a>
 </div>
 </body>
 </html>
