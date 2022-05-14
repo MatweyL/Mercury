@@ -1,9 +1,8 @@
 package com.example.germes.controller;
 
-import com.example.germes.entity.Driver;
 import com.example.germes.entity.UserOrder;
 import com.example.germes.repo.UserOrderRepository;
-import org.apache.catalina.User;
+import com.example.germes.service.UserOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.lang.reflect.MalformedParameterizedTypeException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -21,16 +19,16 @@ import java.util.Date;
 public class UserOrderController {
 
     @Autowired
-    private final UserOrderRepository userOrderRepository;
+    private final UserOrderService userOrderService;
 
-    public UserOrderController(UserOrderRepository userOrderRepository) {
-        this.userOrderRepository = userOrderRepository;
+    public UserOrderController(UserOrderService userOrderService) {
+        this.userOrderService = userOrderService;
     }
 
     @GetMapping({"/list", "/"})
     private ModelAndView getAllUserOrders() {
         ModelAndView mav = new ModelAndView("user/list-user-orders");
-        mav.addObject("userOrders", userOrderRepository.findAll());
+        mav.addObject("userOrders", userOrderService.findAll());
         return mav;
     }
 
@@ -48,11 +46,8 @@ public class UserOrderController {
     public ModelAndView payUserOrder(@ModelAttribute UserOrder userOrder, @RequestParam(name = "dateTimeString") String dateTimeString,
                                        BindingResult binding, ModelAndView mav,
                                        final RedirectAttributes redirectAttributes) {
-        int PAY_PER_KM = 20;
-        LocalDateTime dateOfDispatchLDT = LocalDateTime.parse(dateTimeString);
-        Date dateOfDispatch = Date.from(dateOfDispatchLDT.atZone(ZoneId.systemDefault()).toInstant());
-        userOrder.setDateOfDispatch(dateOfDispatch);
-        userOrder.setDeliveryCost(PAY_PER_KM * userOrder.getDistance());
+        userOrderService.setUserOrderDateOfDispatch(userOrder, dateTimeString);
+        userOrderService.setUserOrderDeliveryCost(userOrder);
         redirectAttributes.addFlashAttribute("userOrder", userOrder);
         mav.setViewName("user/user-order-payment");
         return mav;
@@ -60,16 +55,15 @@ public class UserOrderController {
 
     @PostMapping("/saveUserOrder")
     private String saveUserOrder(@ModelAttribute UserOrder userOrder) {
-        userOrder.setIsClosed(false);
-        System.out.println(userOrder.toStringInConsole());
-        userOrderRepository.save(userOrder);
+        userOrderService.setIsClosedUserOrder(userOrder, false);
+        userOrderService.save(userOrder);
         return "redirect:list";
     }
 
     @GetMapping("/showUserOrderDetails")
     private ModelAndView showUserOrderDetails(@RequestParam Long userOrderId) {
         ModelAndView mav = new ModelAndView("user/user-order-details");
-        UserOrder userOrder = userOrderRepository.getById(userOrderId);
+        UserOrder userOrder = userOrderService.getById(userOrderId);
         mav.addObject("userOrder", userOrder);
         return mav;
     }

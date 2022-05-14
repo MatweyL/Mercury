@@ -2,6 +2,7 @@ package com.example.germes.controller;
 
 import com.example.germes.entity.Driver;
 import com.example.germes.repo.DriverRepository;
+import com.example.germes.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,16 +13,16 @@ import org.springframework.web.servlet.ModelAndView;
 public class DriverController {
 
     @Autowired
-    private final DriverRepository driverRepository;
+    private final DriverService driverService;
 
-    public DriverController(DriverRepository driverRepository) {
-        this.driverRepository = driverRepository;
+    public DriverController(DriverService driverService) {
+        this.driverService = driverService;
     }
 
     @GetMapping({"/list", "/"})
     public ModelAndView getAllDrivers() {
         ModelAndView mav = new ModelAndView("admin/driver/driver_creation/list-drivers");
-        mav.addObject("drivers", driverRepository.findAll());
+        mav.addObject("drivers", driverService.findAll());
         return mav;
     }
 
@@ -35,33 +36,28 @@ public class DriverController {
 
     @PostMapping("/saveDriver")
     public String saveDriver(@ModelAttribute Driver driver) {
-        driver.setIsBusy(false);
-        driver.getCar().setDriver(driver);
-        driverRepository.save(driver);
+        driverService.setDriverIsBusy(driver,false);
+        driverService.save(driver);
         return "redirect:list";
     }
 
     @GetMapping("/showUpdateForm")
     public ModelAndView showUpdateForm(@RequestParam Long driverId) {
         ModelAndView mav = new ModelAndView("admin/driver/driver_creation/update-driver-form");
-        Driver driver = driverRepository.findById(driverId).get();
+        Driver driver = driverService.getById(driverId);
         mav.addObject("driver", driver);
-        System.out.println(driver.toStringInConsole());
         return mav;
     }
 
     @PostMapping("/updateDriver")
     public String updateDriver(@ModelAttribute Driver driver) {
-        System.out.println(driver.toStringInConsole());
-        driver.getCar().setDriver(driver);
-        System.out.println(driver.toStringInConsole());
-        driverRepository.save(driver);
+        driverService.save(driver);
         return "redirect:list";
     }
 
     @GetMapping("/deleteDriver")
     public String deleteDriver(@RequestParam Long driverId) {
-        driverRepository.deleteById(driverId);
+        driverService.deleteById(driverId);
         return "redirect:list";
     }
 

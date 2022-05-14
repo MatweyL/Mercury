@@ -26,6 +26,27 @@ public class DriverService {
         this.driverOrderRepository = driverOrderRepository;
     }
 
+    public Driver getById(Long driverId) {
+        return driverRepository.getById(driverId);
+    }
+
+    public List<Driver> findAll() {
+        return driverRepository.findAll();
+    }
+
+    public Driver save(Driver driver) {
+        driver.getCar().setDriver(driver);
+        return driverRepository.save(driver);
+    }
+
+    public void deleteById(Long driverId) {
+        driverRepository.deleteById(driverId);
+    }
+
+    public void setDriverIsBusy(Driver driver, boolean isBusy) {
+        driver.setIsBusy(isBusy);
+    }
+
     public List<Driver> getAvailableDriversWithCarTypeOnDate(String carType, Date dateOfDispatch, double duration) {
         Date dateOfArrival = Date.from(dateOfDispatch.toInstant().plusSeconds(Math.round(duration * 60)));
         List<Driver> availableDrivers = new ArrayList<>();

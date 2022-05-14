@@ -48,4 +48,16 @@ public class UserService implements UserDetailsService {
     public User findUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
     }
+
+    private void createAdmin() {
+        if (userRepository.findUserByUsername("admin") == null) {
+            User user = new User();
+            user.setUsername("admin");
+            user.setEmail("germes-admin@germes.com");
+            user.setUsername(passwordEncoder.encode("admin"));
+            user.setRole(Role.ADMIN);
+            userRepository.save(user);
+        }
+
+    }
 }
