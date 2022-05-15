@@ -1,25 +1,31 @@
 package com.example.germes.entity;
 
 public enum CarType {
-    CONTAINER("Контейнеровоз"),
-    VAN("Фургон"),
-    GAZELLE("Газель"),
-    OPEN_SIDE_PLATFORM("Открытая бортовая платформа"),
-    REFRIGERATOR("Рефрижератор"),
-    SIDE_PLATFORM_WITH_AWNING("Бортовая платформа с тентом"),
-    LOGGING_TRUCK("Лесовоз"),
-    DUMP_TRUCK("Самосвал"),
-    CEMENT_TRUCK("Цементовоз"),
-    GRAIN_CARRIER("Зерновоз");
+    CONTAINER("Контейнеровоз", 20),
+    VAN("Фургон",10),
+    GAZELLE("Газель", 15),
+    OPEN_SIDE_PLATFORM("Открытая бортовая платформа", 17),
+    REFRIGERATOR("Рефрижератор", 19),
+    SIDE_PLATFORM_WITH_AWNING("Бортовая платформа с тентом", 22),
+    LOGGING_TRUCK("Лесовоз", 25),
+    DUMP_TRUCK("Самосвал", 50),
+    CEMENT_TRUCK("Цементовоз",45),
+    GRAIN_CARRIER("Зерновоз",35);
 
     private final String displayValue;
+    private final int costPerKm;
 
-    CarType(String displayValue) {
+    CarType(String displayValue, int pricePerKm) {
         this.displayValue = displayValue;
+        this.costPerKm = pricePerKm;
     }
 
     public String getDisplayValue() {
         return displayValue;
+    }
+
+    public int getCostPerKm() {
+        return costPerKm;
     }
 
 }

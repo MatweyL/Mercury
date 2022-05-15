@@ -3,6 +3,7 @@ package com.example.germes.service;
 import com.example.germes.entity.User;
 import com.example.germes.entity.UserOrder;
 import com.example.germes.entity.UserOrderStatus;
+import com.example.germes.repo.CarTypePriceRepository;
 import com.example.germes.repo.UserOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,9 +20,12 @@ public class UserOrderService {
     @Autowired
     private final UserOrderRepository userOrderRepository;
 
+    @Autowired
+    private final CarTypePriceRepository carTypePriceRepository;
 
-    public UserOrderService(UserOrderRepository userOrderRepository) {
+    public UserOrderService(UserOrderRepository userOrderRepository, CarTypePriceRepository carTypePriceRepository) {
         this.userOrderRepository = userOrderRepository;
+        this.carTypePriceRepository = carTypePriceRepository;
     }
 
     public List<UserOrder> findAll() {
@@ -55,8 +59,8 @@ public class UserOrderService {
     }
 
     public void setUserOrderDeliveryCost(UserOrder userOrder) {
-        int PAY_PER_KM = 20;
-        userOrder.setDeliveryCost(PAY_PER_KM * userOrder.getDistance());
+        double costPerKm = carTypePriceRepository.findByCarType(userOrder.getCarType()).getCostPerKm();
+        userOrder.setDeliveryCost(costPerKm * userOrder.getDistance());
     }
 
     public User getCurrentUser() {

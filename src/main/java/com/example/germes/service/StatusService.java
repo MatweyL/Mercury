@@ -34,7 +34,6 @@ public class StatusService {
 
     @Scheduled(fixedDelay = 60000)
     public void changeAssignedUserOrderStatus() {
-        System.out.println("CHECK ASSIGNED USER ORDERS");
         List<DriverOrder> driversOrders = driverOrderRepository.findAll();
         for (DriverOrder driverOrder: driversOrders) {
             UserOrder userOrder = driverOrder.getUserOrder();
