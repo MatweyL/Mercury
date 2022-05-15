@@ -6,7 +6,7 @@
 <body>
 <div th:insert="~{base :: site_navbar}"></div>
 <div class="container">
-    <h1>Список открытых заказов пользователей</h1>
+    <h1>Список заказов пользователя <span th:text="${user.username}"></span></h1>
     <hr/>
     <table class="table table-bordered table-striped" id="userOrdersTable">
 
@@ -17,7 +17,6 @@
             <th>Тип машины</th>
             <th>Плата за перевозку</th>
             <th>Длительность</th>
-            <th>Дата отправки</th>
             <th>Действия</th>
         </tr>
         </thead>
@@ -28,15 +27,13 @@
             <td th:text="${userOrder.carType}" />
             <td th:text="${userOrder.deliveryCost}" />
             <td th:text="${userOrder.duration}" />
-            <td th:text="${userOrder.dateOfDispatch}" />
             <td>
-                <a th:href="@{/admin/driver_order/showDriverOrderAssignForm(userOrderId=${userOrder.id})}" class="btn btn-info">Назначить водителя</a>
+                <a th:href="@{/admin/user/showUserOrderDetails(userOrderId=${userOrder.id})}" class="btn btn-info">Подробная информация</a>
             </td>
         </tr>
         </tbody>
 
     </table>
-    <div th:insert="~{base :: to_main_page}"></div>
 </div>
 <div th:insert="~{base :: site_footer}"></div>
 </body>

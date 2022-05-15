@@ -9,4 +9,5 @@ public interface UserOrderRepository extends JpaRepository<UserOrder, Long> {
 
     List<UserOrder> findAllByIsClosedFalse();
     List<UserOrder> findAllByIsClosedTrue();
+    List<UserOrder> findAllByUser_id(Long id);
 }

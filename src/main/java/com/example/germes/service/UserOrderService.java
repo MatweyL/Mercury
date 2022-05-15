@@ -27,6 +27,8 @@ public class UserOrderService {
         return userOrderRepository.findAll();
     }
 
+    public List<UserOrder> findAllCurrentUserOrders() { return userOrderRepository.findAllByUser_id(getCurrentUser().getId());}
+
     public List<UserOrder> findAllByIsClosedFalse() {
         return userOrderRepository.findAllByIsClosedFalse();
     }

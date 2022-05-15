@@ -14,7 +14,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
+    <style>
+        body > .container {
+            min-height: 80vh;
+        }
+    </style>
 </head>
 
 <body>
@@ -62,7 +66,24 @@
     </div>
 </nav>
     <div th:fragment="to_main_page">
-        <a th:href="@{/main}">На главную</a>
+        <a th:href="@{/}">На главную</a>
     </div>
+<footer th:fragment="site_footer" class="text-center text-white bg-dark mt-5">
+    <!-- Grid container -->
+    <div class="container p-2">
+        <span><a href="#" class="text-white">Контактная информация</a></span>
+        <span><a href="#" class="text-white">Правовая информация</a></span>
+        <span><a href="#" class="text-white">Партнерам</a></span>
+        <span><a href="#" class="text-white">Работодательство</a></span>
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3 bg-dark">
+        © 2022 Powered by:
+        <a class="text-white" href="https://github.com/MatweyL">Matvey Lomovtsev</a>
+    </div>
+    <!-- Copyright -->
+</footer>
 </body>
 </html>

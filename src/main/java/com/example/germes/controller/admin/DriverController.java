@@ -1,4 +1,4 @@
-package com.example.germes.controller;
+package com.example.germes.controller.admin;
 
 import com.example.germes.entity.Driver;
 import com.example.germes.repo.DriverRepository;

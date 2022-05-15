@@ -1,4 +1,4 @@
-package com.example.germes.controller;
+package com.example.germes.controller.user;
 
 import com.example.germes.entity.UserOrder;
 import com.example.germes.repo.UserOrderRepository;
@@ -27,8 +27,8 @@ public class UserOrderController {
 
     @GetMapping({"/list", "/"})
     private ModelAndView getAllUserOrders() {
-        ModelAndView mav = new ModelAndView("user/list-user-orders");
-        mav.addObject("userOrders", userOrderService.findAll());
+        ModelAndView mav = new ModelAndView("user/current-user-user-orders-list");
+        mav.addObject("userOrders", userOrderService.findAllCurrentUserOrders());
         return mav;
     }
 

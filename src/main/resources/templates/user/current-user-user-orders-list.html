@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base :: common_header(~{::title})">
+  <title>Список оформленных заказов</title>
 </head>
 <body>
-$END$
+<div th:insert="~{base :: site_navbar}"></div>
+<div class="container">
+  <h1>Список оформленных заказов</h1>
+  <hr/>
+  <table class="table table-bordered table-striped" id="userOrdersTable">
+
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>Тип груза</th>
+      <th>Тип машины</th>
+      <th>Плата за перевозку</th>
+      <th>Длительность</th>
+      <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="userOrder: ${userOrders}">
+      <td th:text="${userOrder.id}" />
+      <td th:text="${userOrder.cargo.cargoType}" />
+      <td th:text="${userOrder.carType}" />
+      <td th:text="${userOrder.deliveryCost}" />
+      <td th:text="${userOrder.duration}" />
+      <td>
+        <a th:href="@{/user_order/showUserOrderDetails(userOrderId=${userOrder.id})}" class="btn btn-info">Подробная информация</a>
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+  <div th:insert="~{base :: to_main_page}"></div>
+</div>
+<div th:insert="~{base :: site_footer}"></div>
 </body>
 </html>

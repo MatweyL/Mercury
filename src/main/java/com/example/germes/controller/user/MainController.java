@@ -1,4 +1,4 @@
-package com.example.germes.controller;
+package com.example.germes.controller.user;
 
 import com.example.germes.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MainController {
-
-    @GetMapping("/main")
-    public ModelAndView showMainPage() {
-        ModelAndView mav = new ModelAndView("main");
-        return mav;
-    }
 
     @GetMapping("/")
     public ModelAndView showStartPage() {

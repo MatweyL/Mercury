@@ -135,6 +135,7 @@
 
 </head>
 <body>
+    <div th:insert="~{base :: site_navbar}"></div>
     <div class="container">
         <h1>Оформить заказ</h1>
         <hr/>
@@ -168,7 +169,6 @@
             </div>
             <button class="btn btn-primary" type="submit">Оформить</button>
         </form>
-        <a th:href="@{/user_order/list}">К списку заказов</a>
         <script>
             function getTwoPlaceNumber(number) {
                 if (number < 10) {
@@ -200,5 +200,6 @@
 
         </script>
     </div>
+    <div th:insert="~{base :: site_footer}"></div>
 </body>
 </html>
