@@ -34,7 +34,7 @@ public class DriverOrderController {
         this.userOrderService = userOrderService;
     }
 
-    @GetMapping({"/list", "/"})
+    @GetMapping({"/unclosedUsersOrders","/list", "/"})
     private ModelAndView getAllUserUnclosedOrders() {
         ModelAndView mav = new ModelAndView("admin/driver/unclosed_orders/list-unclosed-users-orders");
         mav.addObject("userOrders", userOrderService.findAllByIsClosedFalse());
@@ -54,6 +54,20 @@ public class DriverOrderController {
     private String assignDriver(@RequestParam Long userOrderId, @RequestParam Long driverId) {
         driverOrderService.assignDriverToUserOrder(userOrderId, driverId);
         return "redirect:list";
+    }
+
+    @GetMapping("/closedUsersOrders")
+    private ModelAndView getAllClosedOrders() {
+        ModelAndView mav = new ModelAndView("admin/driver/closed_orders/list-closed-users-orders");
+        mav.addObject("userOrders",  userOrderService.findAllByIsClosedTrue());
+        return mav;
+    }
+
+    @GetMapping("/showUserOrdersDetails")
+    private ModelAndView showUserOrdersDetails(@RequestParam Long userOrderId) {
+        ModelAndView mav = new ModelAndView("admin/driver/closed_orders/closed-user-order-details");
+        mav.addObject("userOrder", userOrderService.getById(userOrderId));
+        return mav;
     }
 
 }

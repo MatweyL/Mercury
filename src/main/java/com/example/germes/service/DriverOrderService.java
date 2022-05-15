@@ -3,6 +3,7 @@ package com.example.germes.service;
 import com.example.germes.entity.Driver;
 import com.example.germes.entity.DriverOrder;
 import com.example.germes.entity.UserOrder;
+import com.example.germes.entity.UserOrderStatus;
 import com.example.germes.repo.DriverOrderRepository;
 import com.example.germes.repo.DriverRepository;
 import com.example.germes.repo.UserOrderRepository;
@@ -37,6 +38,7 @@ public class DriverOrderService {
         DriverOrder driverOrder = new DriverOrder();
         driverOrder.setUserOrder(userOrder);
         driverOrder.setDriver(driver);
+        userOrder.setStatus(UserOrderStatus.ASSIGNED.getDisplayValue());
         userOrderRepository.save(userOrder);
         driverOrderRepository.save(driverOrder);
     }

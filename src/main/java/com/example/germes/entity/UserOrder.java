@@ -50,6 +50,8 @@ public class UserOrder {
 
     private Boolean isClosed;
 
+    private String status;
+
     @OneToOne(mappedBy = "userOrder")
     @JoinColumn(name = "driver_order_id", referencedColumnName = "id")
     private DriverOrder driverOrder;

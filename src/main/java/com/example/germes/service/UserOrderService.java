@@ -2,6 +2,7 @@ package com.example.germes.service;
 
 import com.example.germes.entity.User;
 import com.example.germes.entity.UserOrder;
+import com.example.germes.entity.UserOrderStatus;
 import com.example.germes.repo.UserOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,6 +40,7 @@ public class UserOrderService {
 
     public UserOrder save(UserOrder userOrder) {
         userOrder.setUser(getCurrentUser());
+        userOrder.setStatus(UserOrderStatus.NOT_ASSIGNED.getDisplayValue());
         return userOrderRepository.save(userOrder);
     }
 
@@ -63,4 +65,7 @@ public class UserOrderService {
         return currentUser;
     }
 
+    public List<UserOrder> findAllByIsClosedTrue() {
+        return userOrderRepository.findAllByIsClosedTrue();
+    }
 }
