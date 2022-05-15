@@ -25,11 +25,11 @@ public class DriverOrder {
     )
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_order_id", referencedColumnName = "id")
     private UserOrder userOrder;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Driver driver;
 
 }

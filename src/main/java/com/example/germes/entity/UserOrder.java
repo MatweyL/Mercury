@@ -52,7 +52,7 @@ public class UserOrder {
 
     private String status;
 
-    @OneToOne(mappedBy = "userOrder")
+    @OneToOne(mappedBy = "userOrder", fetch = FetchType.EAGER)
     @JoinColumn(name = "driver_order_id", referencedColumnName = "id")
     private DriverOrder driverOrder;
 
