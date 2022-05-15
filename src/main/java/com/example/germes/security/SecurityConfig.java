@@ -10,6 +10,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -61,11 +62,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         authProvider.setUserDetailsService(userService);
         authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
-    }
-
-    @Bean
-    public Long getCurrentUserId() {
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return currentUser.getId();
     }
 }

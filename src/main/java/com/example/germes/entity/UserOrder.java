@@ -54,6 +54,9 @@ public class UserOrder {
     @JoinColumn(name = "driver_order_id", referencedColumnName = "id")
     private DriverOrder driverOrder;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
     public String toStringInConsole() {
         return "UserOrder{" +
                 "id=" + id +

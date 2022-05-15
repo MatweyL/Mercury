@@ -4,6 +4,7 @@ import com.example.germes.entity.User;
 import com.example.germes.entity.UserOrder;
 import com.example.germes.repo.UserOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -35,6 +36,7 @@ public class UserOrderService {
     }
 
     public UserOrder save(UserOrder userOrder) {
+        userOrder.setUser(getCurrentUser());
         return userOrderRepository.save(userOrder);
     }
 
@@ -51,6 +53,12 @@ public class UserOrderService {
     public void setUserOrderDeliveryCost(UserOrder userOrder) {
         int PAY_PER_KM = 20;
         userOrder.setDeliveryCost(PAY_PER_KM * userOrder.getDistance());
+    }
+
+    public User getCurrentUser() {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(currentUser.getId() + " " + currentUser.getUsername());
+        return currentUser;
     }
 
 }
