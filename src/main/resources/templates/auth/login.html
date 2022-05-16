@@ -6,7 +6,7 @@
 <body>
 <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
     <form method="POST" action="/login">
-        <h2>Вход в аккаунт</h2>
+        <h2>Вход в аккаунт "Гермес"</h2>
 
         <!-- Username input -->
         <div class="form-outline mb-4">
@@ -21,6 +21,7 @@
 
         <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block mb-4">Войти</button>
+        <div class="d-flex justify-content-center">Нет аккаунта? <span style="margin-left: 5px;"><a th:href="@{/registration}"> Зарегистрируйтесь!</a></span></div>
     </form>
 </div>
 </body>

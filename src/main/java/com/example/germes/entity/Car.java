@@ -31,14 +31,12 @@ public class Car {
 
     private String carType;
 
-    private Double pricePerKm; //TODO: change to loadCapacity
-
     @OneToOne(mappedBy = "car")
     @JoinColumn(name = "driver_id", referencedColumnName = "id")
     private Driver driver;
 
     public String toStringInConsole() {
         boolean isDriverSet = driver != null;
-        return id + "; " + brand + "; " + carNumber + "; " + carType + "; " + pricePerKm + "; driver: " + isDriverSet;
+        return id + "; " + brand + "; " + carNumber + "; " + carType + "; " + "; driver: " + isDriverSet;
     }
 }

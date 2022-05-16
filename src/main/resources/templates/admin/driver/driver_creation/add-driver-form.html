@@ -7,7 +7,7 @@
 <div th:insert="~{base :: site_navbar}"></div>
     <div class="container">
 
-        <h2>Добавить водителя</h2>
+        <h1>Добавить водителя</h1>
         <hr/>
         <form th:action="@{/admin/driver/saveDriver}" th:object="${driver}" method="POST">
             <input type="text" th:field="*{name}" placeholder="Введите имя" class="form-control col-4 mb-4" required>
@@ -18,7 +18,6 @@
                 <option th:each="carTypeEnum : ${T(com.example.germes.entity.CarType).values()}"
                         th:value="${carTypeEnum.displayValue}" th:text="${carTypeEnum.displayValue}"></option>
             </select>
-            <input type="text" th:field="*{car.pricePerKm}" placeholder="Введите стоимость за км" class="form-control col-4 mb-4" required>
             <button class="btn btn-primary" type="submit">Сохранить</button>
         </form>
         <hr/>
