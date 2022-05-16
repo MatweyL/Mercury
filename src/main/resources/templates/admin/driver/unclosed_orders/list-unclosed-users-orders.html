@@ -10,7 +10,7 @@
     <hr/>
     <table class="table table-bordered table-striped" id="userOrdersTable">
 
-        <thead>
+        <thead class="thead-dark">
         <tr>
             <th>id</th>
             <th>Тип груза</th>
@@ -30,7 +30,7 @@
             <td th:text="${userOrder.duration}" />
             <td th:text="${userOrder.dateOfDispatch}" />
             <td>
-                <a th:href="@{/admin/driver_order/showDriverOrderAssignForm(userOrderId=${userOrder.id})}" class="btn btn-info">Назначить водителя</a>
+                <a th:href="@{/admin/driver_order/showDriverOrderAssignForm(userOrderId=${userOrder.id})}" class="text-primary">Назначить водителя</a>
             </td>
         </tr>
         </tbody>

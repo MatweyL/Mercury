@@ -15,7 +15,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 @Controller
-@RequestMapping(value = "/user_order")
+@RequestMapping(value = "/user/user_order")
 public class UserOrderController {
 
     @Autowired

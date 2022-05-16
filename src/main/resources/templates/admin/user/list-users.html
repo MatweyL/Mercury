@@ -9,9 +9,9 @@
 
     <h1>Список пользователей</h1>
     <hr/>
-    <table class="table table-bordered table-striped" id="driversTable">
+    <table class="table table-bordered table-hover" id="driversTable">
 
-        <thead>
+        <thead class="thead-dark">
         <tr>
             <th>Никнейм</th>
             <th>Почта</th>
@@ -23,7 +23,7 @@
             <td th:text="${user.username}" />
             <td th:text="${user.email}" />
             <td>
-                <a th:href="@{/admin/user/showUserDetails(userId=${user.id})}" class="btn btn-info">Заказы</a>
+                <a th:href="@{/admin/user/showUserDetails(userId=${user.id})}" class="text-primary">Список заказов</a>
             </td>
         </tr>
         </tbody>

@@ -10,7 +10,7 @@
     <hr/>
     <table class="table table-bordered table-striped" id="userOrdersTable">
 
-        <thead>
+        <thead class="thead-dark">
         <tr>
             <th>id</th>
             <th>Тип груза</th>
@@ -28,7 +28,7 @@
             <td th:text="${userOrder.deliveryCost}" />
             <td th:text="${userOrder.duration}" />
             <td>
-                <a th:href="@{/admin/driver_order/showUserOrdersDetails(userOrderId=${userOrder.id})}" class="btn btn-info">Подробная информация</a>
+                <a th:href="@{/admin/driver_order/showUserOrdersDetails(userOrderId=${userOrder.id})}" class="text-primary">Подробная информация</a>
             </td>
         </tr>
         </tbody>

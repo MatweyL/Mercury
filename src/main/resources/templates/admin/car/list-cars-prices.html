@@ -9,8 +9,8 @@
     <h1>Настройка тарифов покилометровой оплаты автомобиля</h1>
     <form th:action="@{/admin/car/updateCarTypePrices}" th:object="${form}" method="POST">
 <!--        <input type="text" th:field="*{name}" placeholder="Введите имя" class="form-control col-4 mb-4" required>-->
-        <table>
-            <thead>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
             <tr>
                 <th>Тип автомобиля</th>
                 <th>Стоимость за километр, р</th>
@@ -24,7 +24,7 @@
                 </tr>
             </tbody>
         </table>
-        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <div class="d-flex justify-content-center"><button class="btn btn-primary" type="submit">Сохранить</button></div>
     </form>
 </div>
 <div th:insert="~{base :: site_footer}"></div>

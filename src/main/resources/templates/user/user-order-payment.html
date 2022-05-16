@@ -8,7 +8,7 @@
     <div class="container">
         <h1>Оплата заказа</h1>
         <hr/>
-        <form th:action="@{/user_order/saveUserOrder}" th:object="${userOrder}" method="POST" id="userOrderForm">
+        <form th:action="@{/user/user_order/saveUserOrder}" th:object="${userOrder}" method="POST" id="userOrderForm">
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-6">
                     <h3>Информация о грузе</h3>
@@ -67,6 +67,7 @@
         </form>
         <a href="#" onclick="history.go(-1)">Обратно к созданию заказа</a>
     </div>
+</div>
 <div th:insert="~{base :: site_footer}"></div>
 </body>
 </html>

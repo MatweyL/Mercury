@@ -24,6 +24,7 @@
 
         .container > h1 {
             margin-top: 24px;
+            margin-bottom: 24px;
         }
 
     </style>
@@ -41,10 +42,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active" sec:authorize="hasRole('USER')">
-                    <a class="nav-link" th:href="@{/user_order/addUserOrderForm}">Создать заказ</a>
+                    <a class="nav-link" th:href="@{/user/user_order/addUserOrderForm}">Создать заказ</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasRole('USER')">
-                    <a class="nav-link active" th:href="@{/user_order/}">Список заказов</a>
+                    <a class="nav-link active" th:href="@{/user/user_order/}">Список заказов</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasRole('ADMIN')">
                     <a class="nav-link active" th:href="@{/admin/user/}">Пользователи</a>
