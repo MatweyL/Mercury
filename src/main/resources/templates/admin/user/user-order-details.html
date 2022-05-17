@@ -35,6 +35,8 @@
                     <span th:if="${userOrder.isClosed}">Да</span>
                     <span th:unless="${userOrder.isClosed}">Нет</span>
                 </p>
+
+                <p>Статус заказа: <span th:text="*{status}"></span></p>
             </div>
         </div>
     </div>

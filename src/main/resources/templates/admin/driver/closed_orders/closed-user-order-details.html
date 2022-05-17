@@ -8,6 +8,23 @@
 <div class="container">
     <h1>Подробная информация о заказе</h1>
     <hr/>
+    <table class="table table-bordered table-striped" id="userOrdersTable">
+        <thead class="thead-dark">
+        <tr>
+            <th>Отправитель</th>
+            <th>Водитель</th>
+            <th>Статус груза</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${userOrder.user.username}" />
+            <td th:text="${userOrder.driverOrder.driver.name} + ' ' + ${userOrder.driverOrder.driver.surname}" />
+            <td th:text="${userOrder.status}" />
+        </tr>
+        </tbody>
+
+    </table>
     <div class="row">
         <div class="col-12 col-sm-12 col-md-6">
             <h3>Информация о грузе</h3>
