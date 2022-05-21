@@ -39,17 +39,18 @@ public class AuthController {
     }
 
     @PostMapping("/registration")
-    public String processLogForm(@ModelAttribute("user") UserDto userDto, BindingResult result){
+    public ModelAndView processLogForm(@ModelAttribute("user") UserDto userDto){
         System.out.println(userDto);
         User existingUser = userService.findUserByUsername(userDto.getUsername());
         if(existingUser != null){
-            result.rejectValue("username",null, "There is already an account registered with that username");
+            ModelAndView mav = new ModelAndView("auth/registration");
+            mav.addObject("existingUsername", userDto.getUsername());
+            return mav;
+        } else {
+            System.out.println(userService.save(userDto));
+            ModelAndView mav = new ModelAndView("auth/login");
+            return mav;
         }
-        if(result.hasErrors()){
-            return "registration";
-        }
-        userService.save(userDto);
-        return "redirect:/";
     }
 
 }

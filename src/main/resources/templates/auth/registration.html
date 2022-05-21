@@ -13,6 +13,11 @@
         <label class="form-label" for="username-inp">Никнейм</label>
         <input th:field="*{username}" type="text" id="username-inp" class="form-control" required/>
     </div>
+    <div th:if= "${existingUsername != null}">
+        <div class="form-outline mb-4 bg-danger text-white p-1">
+            Пользователь с именем '<span th:text="${existingUsername}"></span>' уже существует. </br> Попробуйте другое имя.
+        </div>
+    </div>
     <!-- Email input -->
     <div class="form-outline mb-4">
         <label class="form-label" for="form2Example1">Электронная почта</label>
