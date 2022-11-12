@@ -6,9 +6,22 @@
 <body>
 <div th:insert="~{base :: site_navbar}"></div>
 <div class="container">
-    <h1>Профиль пользователя</h1>
+    <h1>Профиль пользователя </h1>
     <hr/>
-
+    <h3><span th:text="${user.getUsername()}"></span></h3>
+    <hr/>
+    <div class="">
+        <div>Имя</div>
+        <div th:field="*{userDataDto.getName()}"></div>
+        <div>Фамилия</div>
+        <div th:field="*{userDataDto.getSurname()}"></div>
+        <div>Дата рождения</div>
+        <div th:field="*{userDataDto.getBirthday()}"></div>
+        <div>Телефонный номер</div>
+        <div th:field="*{userDataDto.getPhoneNumber()}"></div>
+        <div>Дополнительня информация</div>
+        <div th:field="*{userDataDto.getAdditionalInfo()}"></div>
+    </div>
 </div>
 <div th:insert="~{base :: site_footer}"></div>
 </body>

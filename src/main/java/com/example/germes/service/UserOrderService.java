@@ -65,7 +65,7 @@ public class UserOrderService {
 
     public User getCurrentUser() {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(currentUser.getId() + " " + currentUser.getUsername());
+//        System.out.println(currentUser.getId() + " " + currentUser.getUsername());
         return currentUser;
     }
 
