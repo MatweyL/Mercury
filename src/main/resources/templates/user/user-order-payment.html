@@ -12,19 +12,31 @@
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-6">
                     <h3>Информация о грузе</h3>
-                    <input th:field="*{cargo.cargoType}" class="form-control mb-4" readonly>
-                    <textarea th:field="*{description}" class="form-control mb-4" rows="3" placeholder="Введите краткое описание груза" readonly></textarea>
-                    <input type="number" min="0" step="1" th:field="*{cargo.weight}" placeholder="Введите вес груза" class="form-control mb-4" readonly>
-                    <input type="number" min="0" step="0.1" th:field="*{cargo.length}" placeholder="Введите длину груза" class="form-control mb-4" readonly>
-                    <input type="number" min="0" step="0.1" th:field="*{cargo.width}" placeholder="Введите ширину груза" class="form-control mb-4" readonly>
-                    <input type="number" min="0" step="0.1" th:field="*{cargo.height}" placeholder="Введите высоту груза" class="form-control mb-4" readonly>
+                    <label for="cargoType">Тип груза</label>
+                    <input th:field="*{cargo.cargoType}" class="form-control mb-4" id="cargoType" readonly>
+                    <label for="description">Краткое описание</label>
+                    <textarea th:field="*{description}" class="form-control mb-4" id="description" rows="3" placeholder="Введите краткое описание груза" readonly></textarea>
+                    <label for="weight">Вес, кг</label>
+                    <input type="number" min="0" step="1" th:field="*{cargo.weight}" id="weight" placeholder="Введите вес груза" class="form-control mb-4" readonly>
+                    <label for="length">Длина, м</label>
+                    <input type="number" min="0" step="0.1" th:field="*{cargo.length}" id="length" placeholder="Введите длину груза" class="form-control mb-4" readonly>
+                    <label for="width">Ширина, м</label>
+                    <input type="number" min="0" step="0.1" th:field="*{cargo.width}" id="width" placeholder="Введите ширину груза" class="form-control mb-4" readonly>
+                    <label for="height">Высота, м</label>
+                    <input type="number" min="0" step="0.1" th:field="*{cargo.height}" id="height" placeholder="Введите высоту груза" class="form-control mb-4" readonly>
                     <h3>Параметры доставки</h3>
-                    <input th:field="*{carType}" class="form-control mb-4" readonly>
-                    <input type="text" th:field="*{startAddress}" placeholder="Введите адрес отправки" class="form-control mb-4" readonly>
-                    <input type="text" th:field="*{endAddress}" placeholder="Введите адрес получения" class="form-control mb-4" readonly>
+                    <label for="carType">Тип машины</label>
+                    <input th:field="*{carType}" class="form-control mb-4" id="carType" readonly>
+                    <label for="startAddress">Адрес отправки</label>
+                    <input type="text" th:field="*{startAddress}" id="startAddress" placeholder="Введите адрес отправки" class="form-control mb-4" readonly>
+                    <label for="endAddress">Адрес доставки</label>
+                    <input type="text" th:field="*{endAddress}" id="endAddress" placeholder="Введите адрес получения" class="form-control mb-4" readonly>
+                    <label for="datepicker2">Дата отправления</label>
                     <input type="text" th:field="*{dateOfDispatch}" name="dateTimeString" placeholder="Выберете дату отправки" class="form-control mb-4" id="datepicker2" readonly>
+                    <label for="distance">Расстояние, км</label>
                     <input type="number" th:field="*{distance}" placeholder="Введите дистанцию" class="form-control mb-4" id="distance" readonly>
-                    <input type="number" th:field="*{duration}" placeholder="Введите длительность транспортировки" class="form-control mb-4" id="duration" readonly>
+                    <label for="duration">Длительность, м</label>
+                    <input type="number" th:field="*{duration}"  placeholder="Введите длительность транспортировки" class="form-control mb-4" id="duration" readonly>
 
                 </div>
                 <div class="col-12 col-sm-12 col-md-6">
