@@ -15,4 +15,6 @@ public class UserDto {
 
     private String email;
 
+    private Boolean isDriverRole;
+
 }

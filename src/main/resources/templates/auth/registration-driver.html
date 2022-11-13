@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base :: common_header(~{::title})">
+    <title>Регистрация. Фирма грузоперевозок "Гермес"</title>
+</head>
+<body>
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <form th:action="@{/registration}" th:object="${user}" method="POST">
+        <h2>Регистрация аккаунта (Водитель)</h2>
+
+        <!-- Username input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="username-inp">Никнейм</label>
+            <input th:field="*{username}" type="text" id="username-inp" class="form-control" required/>
+        </div>
+        <div th:if= "${existingUsername != null}">
+            <div class="form-outline mb-4 bg-danger text-white p-1">
+                Пользователь с именем '<span th:text="${existingUsername}"></span>' уже существует. </br> Попробуйте другое имя.
+            </div>
+        </div>
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example1">Электронная почта</label>
+            <input th:field="*{email}" type="email" id="form2Example1" class="form-control" required/>
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example2">Пароль</label>
+            <input th:field="*{password}" type="password" id="form2Example2" class="form-control" required/>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Зарегистрироваться</button>
+        <div class="d-flex justify-content-center">Есть аккаунт? <span style="margin-left: 5px;"><a th:href="@{/login}"> Войти!</a></span></div>
+    </form>
+</div>
+</body>
+</html>

@@ -6,7 +6,8 @@ import java.util.List;
 
 public enum Role {
     USER,
-    ADMIN;
+    ADMIN,
+    DRIVER;
 
     public List<SimpleGrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_" + this.name()));

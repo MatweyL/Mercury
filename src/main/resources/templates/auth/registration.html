@@ -6,7 +6,7 @@
 <body>
 <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
 <form th:action="@{/registration}" th:object="${user}" method="POST">
-    <h2>Регистрация аккаунта</h2>
+    <h2>Регистрация аккаунта (Пользователь)</h2>
 
     <!-- Username input -->
     <div class="form-outline mb-4">
@@ -30,6 +30,10 @@
         <input th:field="*{password}" type="password" id="form2Example2" class="form-control" required/>
     </div>
 
+    <div class="form-outline mb-4">
+        <input th:field="*{isDriverRole}" type="checkbox" id="isUserRole"/>
+        <label for="isUserRole">Я - водитель</label>
+    </div>
     <!-- Submit button -->
     <button type="submit" class="btn btn-primary btn-block mb-4">Зарегистрироваться</button>
     <div class="d-flex justify-content-center">Есть аккаунт? <span style="margin-left: 5px;"><a th:href="@{/login}"> Войти!</a></span></div>
