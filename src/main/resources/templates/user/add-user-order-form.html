@@ -167,7 +167,7 @@
                 <div class="col-12 col-sm-12 col-md-6">
                     <h3>Параметры доставки</h3>
                     <label for="carType">Тип автомобиля</label>
-                    <select th:field="*{carType}" class="form-control mb-4" id="carType" drequired>
+                    <select th:field="*{carType}" class="form-control mb-4" id="carType" required>
                         <option th:each="carTypeEnum : ${T(com.example.germes.entity.CarType).values()}"
                                 th:value="${carTypeEnum.displayValue}" th:text="${carTypeEnum.displayValue}"></option>
                     </select>

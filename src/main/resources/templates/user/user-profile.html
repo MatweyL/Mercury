@@ -8,19 +8,80 @@
 <div class="container">
     <h1>Профиль пользователя </h1>
     <hr/>
-    <h3><span th:text="${user.getUsername()}"></span></h3>
-    <hr/>
-    <div class="">
-        <div>Имя</div>
-        <div th:field="*{userDataDto.getName()}"></div>
-        <div>Фамилия</div>
-        <div th:field="*{userDataDto.getSurname()}"></div>
-        <div>Дата рождения</div>
-        <div th:field="*{userDataDto.getBirthday()}"></div>
-        <div>Телефонный номер</div>
-        <div th:field="*{userDataDto.getPhoneNumber()}"></div>
-        <div>Дополнительня информация</div>
-        <div th:field="*{userDataDto.getAdditionalInfo()}"></div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-body text-center">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                         class="rounded-circle img-fluid" style="width: 150px;">
+                    <h5 class="my-3"><span th:text="${user.getUsername()}"></span></h5>
+                    <p class="text-muted mb-1">Пользователь</p>
+                    <div class="d-flex justify-content-center mb-2">
+                        <a  th:href="@{/user/profile/update}" class="btn btn-primary">Редактировать</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8" th:object="${userDataDto}">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Имя</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0"><span th:text="*{name}"></span></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Фамилия</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0"><span th:text="*{surname}"></span></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Почта</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0"><span th:text="${user.getEmail()}"></span></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Телефон</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0"><span th:text="*{phoneNumber}"></span></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Дата рождения</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0"><span th:text="*{birthday}"></span></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Дополнительная информация</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0"><span th:text="*{additionalInfo}"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div th:insert="~{base :: site_footer}"></div>

@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
 @Service
 public class UserDataService {
 
@@ -26,13 +30,13 @@ public class UserDataService {
         UserData userData = userDataRepository.getUserDataByUser_id(getCurrentUser().getId());
         if (userData == null) {
             userData = new UserData();
+            userData.setUser(getCurrentUser());
         }
         userData.setBirthday(userDataDto.getBirthday());
         userData.setAdditionalInfo(userDataDto.getAdditionalInfo());
+        userData.setPhoneNumber(userDataDto.getPhoneNumber());
         userData.setName(userDataDto.getName());
         userData.setSurname(userDataDto.getSurname());
-        userDataRepository.save(userData);
-
         userDataRepository.save(userData);
     }
 

@@ -38,7 +38,7 @@ public class UserData {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
