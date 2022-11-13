@@ -45,7 +45,6 @@ public class UserDataService {
     }
 
     public User getCurrentUser() {
-        //        System.out.println(currentUser.getId() + " " + currentUser.getUsername());
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 

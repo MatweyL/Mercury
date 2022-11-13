@@ -32,7 +32,7 @@ public class Driver {
 
     private Boolean isBusy;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;
 
