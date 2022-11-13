@@ -11,11 +11,16 @@
     <h3><span th:text="${user.getUsername()}"></span></h3>
     <hr/>
     <form th:action="@{/user/profile/update/save}" th:object="${userDataDto}" method="POST">
-        <input type="text" th:field="*{name}" placeholder="Введите имя" class="form-control col-4 mb-4" required>
-        <input type="text" th:field="*{surname}" placeholder="Введите фамилию" class="form-control col-4 mb-4" required>
-        <input type="text" th:field="*{phoneNumber}" placeholder="Введите дату телефон" class="form-control col-4 mb-4" required>
-        <input  type="date" th:field="*{birthday}" id="datepicker" placeholder="Введите дату рождения" class="form-control col-4 mb-4" required>
-        <textarea th:field="*{additionalInfo}" placeholder="Введите дополнительную информацию" class="form-control col-4 mb-4" rows="3" required></textarea>
+        <label for="name">Имя</label>
+        <input id="name" type="text" th:field="*{name}" placeholder="Введите имя" class="form-control col-4 mb-4" required>
+        <label for="surname">Фамилия</label>
+        <input id="surname" type="text" th:field="*{surname}" placeholder="Введите фамилию" class="form-control col-4 mb-4" required>
+        <label for="phone">Телефон</label>
+        <input id="phone" type="text" th:field="*{phoneNumber}" placeholder="Введите телефон" class="form-control col-4 mb-4" required>
+        <label for="birthday">Дата рождения</label>
+        <input id="birthday" type="date" th:field="*{birthday}" id="datepicker" placeholder="Введите дату рождения" class="form-control col-4 mb-4" required>
+        <label for="additionalInfo">Дополнительная информация</label>
+        <textarea id="additionalInfo" th:field="*{additionalInfo}" placeholder="Введите дополнительную информацию" class="form-control col-4 mb-4" rows="3" required></textarea>
         <button class="btn btn-primary" type="submit">Сохранить</button>
     </form>
 </div>

@@ -26,6 +26,10 @@ public class UserDataService {
         return UserDataDto.fromUserData(userDataRepository.getUserDataByUser_id(getCurrentUser().getId()));
     }
 
+    public UserDataDto getUserDataDto(Long userId) {
+        return UserDataDto.fromUserData(userDataRepository.getUserDataByUser_id(userId));
+    }
+
     public void update(UserDataDto userDataDto) {
         UserData userData = userDataRepository.getUserDataByUser_id(getCurrentUser().getId());
         if (userData == null) {

@@ -20,7 +20,7 @@
         </thead>
         <tbody>
         <tr th:each="user: ${users}">
-            <td th:text="${user.username}" />
+            <td><a th:href="@{/admin/user/user-profile(userId=${user.id})}"><span th:text="${user.username}"></span></a></td>
             <td th:text="${user.email}" />
             <td>
                 <a th:href="@{/admin/user/showUserDetails(userId=${user.id})}" class="text-primary">Список заказов</a>
