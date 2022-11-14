@@ -37,4 +37,8 @@ public class DriverData {
 
     private Boolean is_active;
 
+    public Boolean isAbleToGetOrders() {
+        return is_active && is_verified;
+    }
+
 }

@@ -57,10 +57,28 @@ public class DriverDataService {
         }
         driverData.setUser(getCurrentUser());
         driverData.setDriver(driverDataDto.getDriver());
-        driverData.setIs_active(driverDataDto.getIs_active());
-        driverData.setIs_verified(driverDataDto.getIs_verified());
+        if (driverDataDto.getIs_active() == null) {
+            driverData.setIs_active(true);
+        } else {
+            driverData.setIs_active(driverDataDto.getIs_active());
+        }
+        if (driverDataDto.getIs_verified() == null) {
+            driverData.setIs_verified(false);
+        } else {
+            driverData.setIs_verified(driverDataDto.getIs_verified());
+        }
         driverRepository.save(driverDataDto.getDriver());
         driverDataRepository.save(driverData);
+    }
+
+    public void setDriverIsActive(Long driverId, Boolean isActive) {
+        DriverData driverData = driverDataRepository.getDriverDataByDriver_Id(driverId);
+        driverData.setIs_active(isActive);
+    }
+
+    public void setDriverIsVerified(Long driverId, Boolean isVerified) {
+        DriverData driverData = driverDataRepository.getDriverDataByDriver_Id(driverId);
+        driverData.setIs_verified(isVerified);
     }
 
     public User getCurrentUser() {
