@@ -2,6 +2,7 @@ package com.example.germes.service;
 
 import com.example.germes.entity.Driver;
 import com.example.germes.entity.DriverOrder;
+import com.example.germes.repo.DriverDataRepository;
 import com.example.germes.repo.DriverOrderRepository;
 import com.example.germes.repo.DriverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,14 @@ public class DriverService {
     private final DriverRepository driverRepository;
 
     @Autowired
+    private final DriverDataRepository driverDataRepository;
+
+    @Autowired
     private final DriverOrderRepository driverOrderRepository;
 
-    public DriverService(DriverRepository driverRepository, DriverOrderRepository driverOrderRepository) {
+    public DriverService(DriverRepository driverRepository, DriverDataRepository driverDataRepository, DriverOrderRepository driverOrderRepository) {
         this.driverRepository = driverRepository;
+        this.driverDataRepository = driverDataRepository;
         this.driverOrderRepository = driverOrderRepository;
     }
 
@@ -35,7 +40,6 @@ public class DriverService {
     }
 
     public Driver save(Driver driver) {
-        driver.getCar().setDriver(driver);
         return driverRepository.save(driver);
     }
 
@@ -52,12 +56,13 @@ public class DriverService {
         List<Driver> availableDrivers = new ArrayList<>();
         List<Driver> driversWithTargetCarType = driverRepository.findAllByCar_carType(carType);
         for (Driver driver: driversWithTargetCarType) {
-            List<List<Date>> driverFreeIntervals =  getDriverFreeTimeIntervals(driver.getId());
-            for (List<Date> freeInterval: driverFreeIntervals) {
-                if (dateOfDispatch.after(freeInterval.get(0)) && dateOfArrival.before(freeInterval.get(1))) {
-                    availableDrivers.add(driver);
-                    //System.out.println(freeInterval.get(0) + " <= " + dateOfDispatch + "; " + dateOfArrival + " <= " + freeInterval.get(1));
-                    break;
+            if (driverDataRepository.getDriverDataByDriver_Id(driver.getId()).isAbleToGetOrders()) {
+                List<List<Date>> driverFreeIntervals = getDriverFreeTimeIntervals(driver.getId());
+                for (List<Date> freeInterval : driverFreeIntervals) {
+                    if (dateOfDispatch.after(freeInterval.get(0)) && dateOfArrival.before(freeInterval.get(1))) {
+                        availableDrivers.add(driver);
+                        break;
+                    }
                 }
             }
         }

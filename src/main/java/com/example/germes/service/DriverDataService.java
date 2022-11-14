@@ -1,13 +1,11 @@
 package com.example.germes.service;
 
+import com.example.germes.entity.Driver;
 import com.example.germes.entity.DriverData;
 import com.example.germes.entity.DriverOrder;
 import com.example.germes.entity.User;
 import com.example.germes.entity.dto.DriverDataDto;
-import com.example.germes.repo.DriverDataRepository;
-import com.example.germes.repo.DriverOrderRepository;
-import com.example.germes.repo.DriverRepository;
-import com.example.germes.repo.UserRepository;
+import com.example.germes.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -26,14 +24,18 @@ public class DriverDataService {
     private final UserRepository userRepository;
 
     @Autowired
+    private final CarRepository carRepository;
+
+    @Autowired
     private final DriverOrderRepository driverOrderRepository;
 
     @Autowired
     private final DriverRepository driverRepository;
 
-    public DriverDataService(DriverDataRepository driverDataRepository, UserRepository userRepository, DriverOrderRepository driverOrderRepository, DriverRepository driverRepository) {
+    public DriverDataService(DriverDataRepository driverDataRepository, UserRepository userRepository, CarRepository carRepository, DriverOrderRepository driverOrderRepository, DriverRepository driverRepository) {
         this.driverDataRepository = driverDataRepository;
         this.userRepository = userRepository;
+        this.carRepository = carRepository;
         this.driverOrderRepository = driverOrderRepository;
         this.driverRepository = driverRepository;
     }
@@ -86,7 +88,9 @@ public class DriverDataService {
         } else {
             driverData.setIs_verified(driverDataDto.getIs_verified());
         }
-        driverRepository.save(driverDataDto.getDriver());
+        Driver driver = driverDataDto.getDriver();
+        carRepository.save(driver.getCar());
+        driverRepository.save(driver);
         driverDataRepository.save(driverData);
     }
 

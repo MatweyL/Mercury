@@ -4,6 +4,8 @@ import com.example.germes.entity.Driver;
 import com.example.germes.entity.DriverData;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface DriverDataRepository extends JpaRepository<DriverData, Long> {
 
     DriverData getDriverDataByDriver_Id(Long driverId);
