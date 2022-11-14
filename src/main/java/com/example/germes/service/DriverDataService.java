@@ -1,16 +1,18 @@
 package com.example.germes.service;
 
 import com.example.germes.entity.DriverData;
+import com.example.germes.entity.DriverOrder;
 import com.example.germes.entity.User;
-import com.example.germes.entity.UserData;
 import com.example.germes.entity.dto.DriverDataDto;
-import com.example.germes.entity.dto.UserDataDto;
 import com.example.germes.repo.DriverDataRepository;
+import com.example.germes.repo.DriverOrderRepository;
 import com.example.germes.repo.DriverRepository;
 import com.example.germes.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DriverDataService {
@@ -23,11 +25,15 @@ public class DriverDataService {
     private final UserRepository userRepository;
 
     @Autowired
+    private final DriverOrderRepository driverOrderRepository;
+
+    @Autowired
     private final DriverRepository driverRepository;
 
-    public DriverDataService(DriverDataRepository driverDataRepository, UserRepository userRepository, DriverRepository driverRepository) {
+    public DriverDataService(DriverDataRepository driverDataRepository, UserRepository userRepository, DriverOrderRepository driverOrderRepository, DriverRepository driverRepository) {
         this.driverDataRepository = driverDataRepository;
         this.userRepository = userRepository;
+        this.driverOrderRepository = driverOrderRepository;
         this.driverRepository = driverRepository;
     }
 
@@ -52,6 +58,9 @@ public class DriverDataService {
 
     public void update(DriverDataDto driverDataDto) {
         DriverData driverData = driverDataRepository.getDriverDataByUser_Id(getCurrentUser().getId());
+        if (driverData == null) {
+            driverData = driverDataRepository.getDriverDataByDriver_NameAndDriver_Surname(driverDataDto.getDriver().getName(), driverDataDto.getDriver().getSurname());
+        }
         if (driverData == null) {
             driverData = new DriverData();
         }
@@ -81,7 +90,17 @@ public class DriverDataService {
         driverData.setIs_verified(isVerified);
     }
 
+    public List<DriverOrder> getCurrentDriverOrders() {
+        Long currentUserId = getCurrentUser().getId();
+        DriverData driverData = driverDataRepository.getDriverDataByUser_Id(currentUserId);
+        if (driverData != null) {
+            return driverOrderRepository.findAllByDriver_Id(driverData.getDriver().getId());
+        }
+        return null;
+    }
+
     public User getCurrentUser() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
+
 }

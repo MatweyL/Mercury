@@ -16,13 +16,28 @@
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                          class="rounded-circle img-fluid" style="width: 150px;">
                     <h5 class="my-3"><span th:text="${driverDataDto.user.getUsername()}"></span></h5>
-                    <p class="text-muted mb-1">Пользователь</p>
+                    <p class="text-muted mb-1">Водитель</p>
                     <div class="d-flex justify-content-center mb-2">
                         <a  th:href="@{/driver/profile/update}" class="btn btn-primary">Редактировать</a>
                     </div>
                 </div>
             </div>
+            <div class="card mb-4 mb-lg-0">
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush rounded-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <span>Статус</span>
+                            <p th:classappend="${driverDataDto.is_active} ? 'text-success' : 'text-danger'" class="mb-0" th:text="${driverDataDto.is_active} ? 'активен' : 'неактивен'"></p>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <span>Профиль</span>
+                            <p th:classappend="${driverDataDto.is_verified} ? 'text-success' : 'text-danger'" class="mb-0" th:text="${driverDataDto.is_verified} ? 'подтвержден' : 'неподтвержден'"></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
+
         <div class="col-lg-8" th:object="${driverDataDto}">
             <div class="card mb-4">
                 <div class="card-body">

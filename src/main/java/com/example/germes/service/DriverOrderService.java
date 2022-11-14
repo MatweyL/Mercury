@@ -42,4 +42,9 @@ public class DriverOrderService {
         userOrderRepository.save(userOrder);
         driverOrderRepository.save(driverOrder);
     }
+
+    public List<DriverOrder> getDriverOrders(Long driverId) {
+        return driverOrderRepository.findAllByDriver_Id(driverId);
+    }
+
 }

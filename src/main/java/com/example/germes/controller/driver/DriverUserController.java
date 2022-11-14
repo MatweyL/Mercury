@@ -1,8 +1,8 @@
 package com.example.germes.controller.driver;
 
-import com.example.germes.entity.Driver;
 import com.example.germes.entity.dto.DriverDataDto;
 import com.example.germes.service.DriverDataService;
+import com.example.germes.service.UserOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +18,13 @@ public class DriverUserController {
     @Autowired
     private final DriverDataService driverDataService;
 
-    public DriverUserController(DriverDataService driverDataService) {
+    @Autowired
+    private final UserOrderService userOrderService;
+
+
+    public DriverUserController(DriverDataService driverDataService, UserOrderService userOrderService) {
         this.driverDataService = driverDataService;
+        this.userOrderService = userOrderService;
     }
 
     @GetMapping({"/profile"})
@@ -40,6 +45,20 @@ public class DriverUserController {
     public String saveProfile(@ModelAttribute DriverDataDto driverDataDto) {
         driverDataService.update(driverDataDto);
         return "redirect:/driver/profile";
+    }
+
+    @GetMapping({"/orders"})
+    public ModelAndView getDriverOrders() {
+        ModelAndView mav = new ModelAndView("driver/list-driver-orders");
+        mav.addObject("driverOrders", driverDataService.getCurrentDriverOrders());
+        return mav;
+    }
+
+    @GetMapping({"/orders/order"})
+    public ModelAndView getDriverOrder(Long userOrderId) {
+        ModelAndView mav = new ModelAndView("driver/driver-order-details");
+        mav.addObject("userOrder", userOrderService.getById(userOrderId));
+        return mav;
     }
 
 

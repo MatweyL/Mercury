@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base :: common_header(~{::title})">
+    <title>Список открытых заказов</title>
 </head>
 <body>
+<div th:insert="~{base :: site_navbar}"></div>
+<div class="container">
+    <h1>История заказов</h1>
+    <hr/>
+    <table class="table table-bordered table-striped" id="userOrdersTable">
 
+        <thead class="thead-dark">
+        <tr>
+            <th>Тип груза</th>
+            <th>Тип машины</th>
+            <th>Плата за перевозку</th>
+            <th>Длительность</th>
+            <th>Дата отправки</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="driverOrder: *{driverOrders}">
+            <td th:text="${driverOrder.userOrder.cargo.cargoType}"></td>
+            <td th:text="${driverOrder.userOrder.carType}"></td>
+            <td th:text="${driverOrder.userOrder.deliveryCost}"></td>
+            <td th:text="${driverOrder.userOrder.duration}"></td>
+            <td th:text="${driverOrder.userOrder.dateOfDispatch}"></td>
+            <td th:text="${driverOrder.userOrder.status}"></td>
+            <td>
+                <a th:href="@{/driver/orders/order(userOrderId=${driverOrder.userOrder.id})}" class="text-primary">Подробная информация</a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+    <div th:insert="~{base :: to_main_page}"></div>
+</div>
+<div th:insert="~{base :: site_footer}"></div>
 </body>
 </html>
