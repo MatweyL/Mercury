@@ -35,8 +35,11 @@
                 <span th:unless="*{driverDataDto.driver.isBusy}">Нет</span>
             </td>
             <td class="d-grid gap-2">
+                <a th:href="@{/admin/driver/profile(driverId=*{driverDataDto.driver.id})}">
+                    Подробная информация
+                </a>
                 <span th:if="*{!driverDataDto.is_verified}">
-                    <a th:href="@{/admin/driver/verifyDriver(driverId=*{driverDataDto.driver.id}, isVerified=*{!driverDataDto.is_verified})}">
+                    <a th:href="@{/admin/driver/verifyDriver(driverId=*{driverDataDto.driver.id}, isVerified=*{!driverDataDto.is_verified})}" class="text-success">
                         Верифицировать профиль
                     </a>
                 </span>

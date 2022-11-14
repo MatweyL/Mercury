@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="base :: common_header(~{::title})">
-    <title>Фирма грузоперевозок "Гермес"</title>
+    <title>Фирма грузоперевозок "Меркурий"</title>
 </head>
 <body>
     <div th:insert="~{base :: site_navbar}"></div>
@@ -10,7 +10,7 @@
         <!-- Main jumbotron for a primary marketing message or call to action -->
         <div class="jumbotron">
             <div class="container">
-                <h1 class="display-3">Фирма грузоперевозок "Гермес"</h1>
+                <h1 class="display-3">Фирма грузоперевозок "Меркурий"</h1>
                 <p>За время своей работы компания «Гермес» перевезла тонны грузов, были решены сложные логистические задачи. Выстроена и отлажена прозрачная схема доставок по всей России. Результатом работы компании остались довольны тысячи клиентов многие из которых стали постоянными клиентами.</p>
                 <p><a class="btn btn-primary btn-lg" th:href="@{/user/user_order/addUserOrderForm}" sec:authorize="hasRole('USER') || !isAuthenticated()" role="button">Оформить заказ &raquo;</a></p>
             </div>

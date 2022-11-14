@@ -115,6 +115,10 @@ public class DriverDataService {
         return null;
     }
 
+    public List<DriverOrder> getDriverOrders(Long driverId) {
+        return driverOrderRepository.findAllByDriver_Id(driverId);
+    }
+
     public User getCurrentUser() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }

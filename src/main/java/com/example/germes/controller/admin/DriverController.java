@@ -1,6 +1,5 @@
 package com.example.germes.controller.admin;
 
-import com.example.germes.entity.Driver;
 import com.example.germes.service.DriverDataService;
 import com.example.germes.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,44 +24,23 @@ public class DriverController {
 
     @GetMapping({"/list", "/"})
     public ModelAndView getAllDrivers() {
-        ModelAndView mav = new ModelAndView("admin/driver/driver_creation/list-drivers");
+        ModelAndView mav = new ModelAndView("admin/driver/drivers/list-drivers");
         mav.addObject("driversDataDto", driverDataService.getAll());
         return mav;
     }
 
-    @GetMapping("/addDriverForm")
-    public ModelAndView addDriverForm() {
-        ModelAndView mav = new ModelAndView("admin/driver/driver_creation/add-driver-form");
-        Driver newDriver = new Driver();
-        mav.addObject("driver", newDriver);
+    @GetMapping({"/profile"})
+    public ModelAndView getDriver(@RequestParam Long driverId) {
+        ModelAndView mav = new ModelAndView("admin/driver/drivers/driver-profile");
+        mav.addObject("driverDataDto", driverDataService.getDriverDataDtoByDriverId(driverId));
         return mav;
     }
 
-    @PostMapping("/saveDriver")
-    public String saveDriver(@ModelAttribute Driver driver) {
-        driverService.setDriverIsBusy(driver,false);
-        driverService.save(driver);
-        return "redirect:list";
-    }
-
-    @GetMapping("/showUpdateForm")
-    public ModelAndView showUpdateForm(@RequestParam Long driverId) {
-        ModelAndView mav = new ModelAndView("admin/driver/driver_creation/update-driver-form");
-        Driver driver = driverService.getById(driverId);
-        mav.addObject("driver", driver);
+    @GetMapping({"/profile/orders"})
+    public ModelAndView getDriverOrders(@RequestParam Long driverId) {
+        ModelAndView mav = new ModelAndView("admin/driver/drivers/list-driver-orders");
+        mav.addObject("driverOrders", driverDataService.getDriverOrders(driverId));
         return mav;
-    }
-
-    @PostMapping("/updateDriver")
-    public String updateDriver(@ModelAttribute Driver driver) {
-        driverService.save(driver);
-        return "redirect:list";
-    }
-
-    @GetMapping("/deleteDriver")
-    public String deleteDriver(@RequestParam Long driverId) {
-        driverService.deleteById(driverId);
-        return "redirect:list";
     }
 
     @GetMapping("/verifyDriver")
