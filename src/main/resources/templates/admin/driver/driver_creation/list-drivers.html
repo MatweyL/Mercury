@@ -24,21 +24,28 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="driver: ${drivers}">
-            <td th:text="${driver.name}" />
-            <td th:text="${driver.surname}" />
-            <td th:text="${driver.car.brand}" />
-            <td th:text="${driver.car.carNumber}" />
-            <td th:text="${driver.car.carType}" />
+        <tr th:each="driverDataDto: ${driversDataDto}">
+            <td th:text="*{driverDataDto.driver.name}" />
+            <td th:text="*{driverDataDto.driver.surname}" />
+            <td th:text="*{driverDataDto.driver.car.brand}" />
+            <td th:text="*{driverDataDto.driver.car.carNumber}" />
+            <td th:text="*{driverDataDto.driver.car.carType}" />
             <td>
-                <span th:if="${driver.isBusy}">Да</span>
-                <span th:unless="${driver.isBusy}">Нет</span>
+                <span th:if="*{driverDataDto.driver.isBusy}">Да</span>
+                <span th:unless="*{driverDataDto.driver.isBusy}">Нет</span>
             </td>
             <td class="d-grid gap-2">
-                <a th:href="@{/admin/driver/showUpdateForm(driverId=${driver.id})}" class="text-primary">Редактировать</a>
+                <span th:if="*{!driverDataDto.is_verified}">
+                    <a th:href="@{/admin/driver/verifyDriver(driverId=*{driverDataDto.driver.id}, isVerified=*{!driverDataDto.is_verified})}">
+                        Верифицировать профиль
+                    </a>
+                </span>
 
-                <a th:href="@{/admin/driver/deleteDriver(driverId=${driver.id})}" class="text-danger">Удалить</a>
-            </td>
+                    <a th:href="@{/admin/driver/activateDriver(driverId=*{driverDataDto.driver.id}, isActive=*{!driverDataDto.is_active})}" th:classappend="${driverDataDto.is_active} ? 'text-danger' : 'text-success'">
+                        <span th:text="*{driverDataDto.is_active}? 'Деактивировать' : 'Активировать'"></span>
+                    </a>
+
+                 </td>
         </tr>
         </tbody>
 

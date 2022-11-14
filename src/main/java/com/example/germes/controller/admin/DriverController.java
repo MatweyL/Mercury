@@ -1,7 +1,7 @@
 package com.example.germes.controller.admin;
 
 import com.example.germes.entity.Driver;
-import com.example.germes.repo.DriverRepository;
+import com.example.germes.service.DriverDataService;
 import com.example.germes.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,14 +15,18 @@ public class DriverController {
     @Autowired
     private final DriverService driverService;
 
-    public DriverController(DriverService driverService) {
+    @Autowired
+    private final DriverDataService driverDataService;
+
+    public DriverController(DriverService driverService, DriverDataService driverDataService) {
         this.driverService = driverService;
+        this.driverDataService = driverDataService;
     }
 
     @GetMapping({"/list", "/"})
     public ModelAndView getAllDrivers() {
         ModelAndView mav = new ModelAndView("admin/driver/driver_creation/list-drivers");
-        mav.addObject("drivers", driverService.findAll());
+        mav.addObject("driversDataDto", driverDataService.getAll());
         return mav;
     }
 
@@ -60,5 +64,18 @@ public class DriverController {
         driverService.deleteById(driverId);
         return "redirect:list";
     }
+
+    @GetMapping("/verifyDriver")
+    public String verifyDriver(@RequestParam Long driverId, Boolean isVerified) {
+        driverDataService.setDriverIsVerified(driverId, isVerified);
+        return "redirect:list";
+    }
+
+    @GetMapping("/activateDriver")
+    public String activateDriver(@RequestParam Long driverId, Boolean isActive) {
+        driverDataService.setDriverIsActive(driverId, isActive);
+        return "redirect:list";
+    }
+
 
 }

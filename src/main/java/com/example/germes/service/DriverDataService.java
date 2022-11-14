@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,6 +36,15 @@ public class DriverDataService {
         this.userRepository = userRepository;
         this.driverOrderRepository = driverOrderRepository;
         this.driverRepository = driverRepository;
+    }
+
+    public List<DriverDataDto> getAll() {
+        List<DriverDataDto> driversDataDto = new ArrayList<>();
+        List<DriverData> driverData = driverDataRepository.findAll();
+        for (DriverData data: driverData) {
+            driversDataDto.add(DriverDataDto.fromDriverData(data));
+        }
+        return driversDataDto;
     }
 
     public DriverDataDto getDriverDataDto() {
@@ -83,11 +93,13 @@ public class DriverDataService {
     public void setDriverIsActive(Long driverId, Boolean isActive) {
         DriverData driverData = driverDataRepository.getDriverDataByDriver_Id(driverId);
         driverData.setIs_active(isActive);
+        driverDataRepository.save(driverData);
     }
 
     public void setDriverIsVerified(Long driverId, Boolean isVerified) {
         DriverData driverData = driverDataRepository.getDriverDataByDriver_Id(driverId);
         driverData.setIs_verified(isVerified);
+        driverDataRepository.save(driverData);
     }
 
     public List<DriverOrder> getCurrentDriverOrders() {
