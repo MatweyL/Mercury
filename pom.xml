@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>germes</artifactId>
+    <artifactId>mercury</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>germes</name>
-    <description>germes</description>
+    <name>mercury</name>
+    <description>mercury</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -100,7 +100,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.example.germes.GermesApplication</mainClass>
+                            <mainClass>com.example.merkury.MercuryApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

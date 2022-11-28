@@ -16,7 +16,7 @@
         <input type="text" th:field="*{driver.car.brand}" placeholder="Введите марку автомобиля" class="form-control col-4 mb-4" required>
         <input type="text" th:field="*{driver.car.carNumber}" placeholder="Введите номер автомобиля" class="form-control col-4 mb-4" required>
         <select th:field="*{driver.car.carType}" class="form-control col-4 mb-4" required>
-            <option th:each="carTypeEnum : ${T(com.example.germes.entity.CarType).values()}"
+            <option th:each="carTypeEnum : ${T(com.example.merkury.entity.CarType).values()}"
                     th:value="${carTypeEnum.displayValue}" th:text="${carTypeEnum.displayValue}"></option>
         </select>
         <button class="btn btn-primary" type="submit">Сохранить</button>
