@@ -30,7 +30,7 @@
             <td th:text="${driverOrder.userOrder.dateOfDispatch}"></td>
             <td th:text="${driverOrder.userOrder.status}"></td>
             <td>
-                <a th:href="@{/driver/orders/order(userOrderId=${driverOrder.userOrder.id})}" class="text-primary">Подробная информация</a>
+                <a th:href="@{/admin/driver_order/showUserOrdersDetails(userOrderId=${driverOrder.userOrder.id})}" class="text-primary">Подробная информация</a>
             </td>
         </tr>
         </tbody>

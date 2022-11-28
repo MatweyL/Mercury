@@ -26,6 +26,9 @@
             margin-top: 24px;
             margin-bottom: 24px;
         }
+        .jumbotron {
+          background-color: azure;
+        }
 
     </style>
 </head>
@@ -62,14 +65,8 @@
                 <li class="nav-item" sec:authorize="hasRole('ADMIN')">
                     <a class="nav-link active" th:href="@{/admin/car/}">Тарифы</a>
                 </li>
-                <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
-                <span class="nav-link dropdown-toggle" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Водители
-                </span>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" th:href="@{/admin/driver/}">Список водителей</a>
-                        <a class="dropdown-item" th:href="@{/admin/driver/addDriverForm}">Добавить водителя</a>
-                    </div>
+                <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link active" th:href="@{/admin/driver/}">Водители</a>
                 </li>
                 <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
                 <span class="nav-link dropdown-toggle" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
