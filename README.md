@@ -8,7 +8,7 @@
 - DATABASE_NAME=  
 - DATABASE_USERNAME=  
 - DATABASE_PASSWORD=  
-- DATABASE_PORT_INT=5432  
+- DATABASE_PORT_INT=  
 - DATABASE_PORT_EXT=  
 Далее в корне проекта выполнить:  
 ```docker-compose up -d```  
